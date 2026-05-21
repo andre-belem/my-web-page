@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Portfólio</title>
+    <style>
+        /* Configurações Globais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        /* Cabeçalho e Menu */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a:hover {
+            color: #007bff;
+            transition: 0.3s;
+        }
+
+        /* Seções Gerais */
+        section {
+            padding: 100px 20px 80px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background-color: #007bff;
+            margin: 10px auto 0 auto;
+            border-radius: 2px;
+        }
+
+        /* Seção Home */
+        #home {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 100vh;
+            padding-top: 60px;
+        }
+
+        #home h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+        }
+
+        #home p {
+            font-size: 1.5rem;
+            color: #6c757d;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Seção Sobre */
+        .about-content {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* Seção Projetos */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 200px;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+        }
+
+        .project-info {
+            padding: 20px;
+        }
+
+        .project-info h3 {
+            margin-bottom: 10px;
+        }
+
+        /* Seção Contato */
+        #contact {
+            text-align: center;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+
+        .contact-links a {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: #343a40;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            #home h1 { font-size: 2.5rem; }
+            #home p { font-size: 1.2rem; }
+            .nav-links { display: none; } /* Simplificação para mobile */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cabeçalho -->
+    <header>
+        <nav class="nav-container">
+            <div class="logo">SeuNome.dev</div>
+            <ul class="nav-links">
+                <li><a href="#home">Início</a></li>
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#projects">Projetos</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Home -->
+    <section id="home">
+        <h1>Olá, eu sou o Seu Nome</h1>
+        <p>Desenvolvedor Full Stack & Designer Autodidata</p>
+        <a href="#projects" class="btn">Ver Meus Projetos</a>
+    </section>
+
+    <!-- Sobre -->
+    <section id="about">
+        <h2 class="section-title">Sobre Mim</h2>
+        <div class="about-content">
+            <p>Escreva aqui um breve resumo sobre você, sua trajetória profissional, suas principais paixões no mundo da tecnologia e quais problemas você adora resolver com código.</p>
+        </div>
+    </section>
+
+    <!-- Projetos -->
+    <section id="projects">
+        <h2 class="section-title">Projetos Recentes</h2>
+        <div class="projects-grid">
+            
+            <!-- Card Projeto 1 -->
+            <div class="project-card">
+                <div class="project-img">[ Imagem do Projeto ]</div>
+                <div class="project-info">
+                    <h3>Nome do Projeto 1</h3>
+                    <p>Descrição curta do que o projeto faz, tecnologias utilizadas e o seu papel no desenvolvimento.</p>
+                </div>
+            </div>
+
+            <!-- Card Projeto 2 -->
+            <div class="project-card">
+                <div class="project-img">[ Imagem do Projeto ]</div>
+                <div class="project-info">
+                    <h3>Nome do Projeto 2</h3>
+                    <p>Descrição curta do que o projeto faz, tecnologias utilizadas e o seu papel no desenvolvimento.</p>
+                </div>
+            </div>
+
+            <!-- Card Projeto 3 -->
+            <div class="project-card">
+                <div class="project-img">[ Imagem do Projeto ]</div>
+                <div class="project-info">
+                    <h3>Nome do Projeto 3</h3>
+                    <p>Descrição curta do que o projeto faz, tecnologias utilizadas e o seu papel no desenvolvimento.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contact">
+        <h2 class="section-title">Vamos Conversar?</h2>
+        <p>Estou sempre aberto a novas oportunidades e parcerias.</p>
+        <div class="contact-links">
+            <a href="mailto:seuemail@exemplo.com">E-mail</a>
+            <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+            <a href="https://github.com" target="_blank">GitHub</a>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2026 Seu Nome. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>

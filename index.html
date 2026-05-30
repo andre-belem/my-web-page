@@ -28,7 +28,7 @@
             list-style: none;
         }
 
-        /* Cabe�alho e Menu */
+        /* Cabeçalho e Menu */
         header {
             position: fixed;
             top: 0;
@@ -64,7 +64,7 @@
             transition: 0.3s;
         }
 
-        /* Se��es Gerais */
+        /* Seção Gerais */
         section {
             padding: 100px 20px 80px 20px;
             max-width: 1100px;
@@ -88,7 +88,7 @@
             border-radius: 2px;
         }
 
-        /* Se��o Home */
+        /* Seção Home */
         #home {
             display: flex;
             flex-direction: column;
@@ -97,6 +97,13 @@
             text-align: center;
             min-height: 100vh;
             padding-top: 60px;
+        }
+
+        #home ul li {
+            list-style-type: disc; /* Adiciona a bolinha preta padrão */
+            font-size: 1.25rem;
+            text-align: left;
+            margin-left: 0px;
         }
 
         #home h1 {
@@ -124,7 +131,7 @@
             background-color: #0056b3;
         }
 
-        /* Se��o Sobre */
+        /* Seção Sobre */
         .about-content {
             font-size: 1.2rem;
             max-width: 800px;
@@ -132,7 +139,7 @@
             text-align: center;
         }
 
-        /* Se��o Projetos */
+        /* Seção Projetos */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -169,7 +176,7 @@
             margin-bottom: 10px;
         }
 
-        /* Se��o Contato */
+        /* Seção Contato */
         #contact {
             text-align: center;
         }
@@ -187,7 +194,7 @@
             font-weight: bold;
         }
 
-        /* Rodap� */
+        /* Rodapé */
         footer {
             background-color: #343a40;
             color: #fff;
@@ -200,16 +207,24 @@
         @media (max-width: 768px) {
             #home h1 { font-size: 2.5rem; }
             #home p { font-size: 1.2rem; }
-            .nav-links { display: none; } /* Simplifica��o para mobile */
+            .nav-links { display: none; } /* Simplificação para mobile */
         }
     </style>
 </head>
 <body>
 
-    <!-- Cabe�alho -->
+    <!-- Cabeçalho -->
     <header>
         <nav class="nav-container">
-            <div class="logo">Andre.Belem.br</div>
+            <div class="logo"><h2>Andre.Belem.br
+                <!-- Código geométrico puro (Não precisa de internet para carregar) -->
+                <svg xmlns="http://w3.org" viewBox="0 0 720 504" width="28" style="display: inline-block; vertical-align: middle; margin-left: 5px;">
+                    <rect width="720" height="504" fill="#009739"/>
+                    <polygon points="360,54 666,252 360,450 54,252" fill="#FED100"/>
+                    <circle cx="360" cy="252" r="100" fill="#00185F"/>
+                    <path d="M261,260 C295,220 380,215 459,248 C460,245 455,237 445,233 C370,200 290,205 260,245 Z" fill="#FFF"/>
+                </svg></h2>
+            </div>
             <ul class="nav-links">
                 <li><a href="#home">Início</a></li>
                 <li><a href="#about">Sobre</a></li>
@@ -221,8 +236,18 @@
 
     <!-- Home -->
     <section id="home">
-        <h1>Olá, eu sou o André Belém</h1>
-        <p>Engenheiro Eletrônico, Hardware - Firmware - Cloud<br><i>site em desenvolvimento, última atualizaçãoo: 20/05/2026</i></p>
+        <h1>Olá, eu sou o Engenheiro André Belém</h1>
+        <p>Especialista em integração de sistemas complexos de ponta a ponta (End-to-End):
+            <ul>
+            <li>IoT & Hardware: Desenvolvimento de Hardware e Firmware.</li>
+            <li>Network/Firewall: Análise de Rede DNS, DHCP, LAN, WAN, ROUTER E SWITCH.</li>
+            <li>Software & Infraestrutura: Arquitetura de Back-end, Front-end e Banco de Dados.</li>
+            <li>Data Analytics: Criação de Dashboards estratégicos para tomada de decisão.
+            </ul>
+        </p>
+            
+        <p><i>site em desenvolvimento, última atualizaçãoo: 29/05/2026</i></p>
+
         <a href="#projects" class="btn">Ver Meus Projetos</a>
     </section>
 
@@ -230,7 +255,7 @@
     <section id="about">
         <h2 class="section-title">Sobre Mim</h2>
         <div class="about-content">
-            <p>Escreva aqui um breve resumo sobre voc�, sua trajet�ria profissional, suas principais paix�es no mundo da tecnologia e quais problemas voc� adora resolver com c�digo.</p>
+            <p>Escreva aqui um breve resumo sobre vocÊ, sua trajetória profissional, suas principais paixões no mundo da tecnologia e quais problemas você adora resolver com código.</p>
         </div>
     </section>
 
@@ -280,7 +305,7 @@
         </div>
     </section>
 
-    <!-- Rodap� -->
+    <!-- Rodapé -->
     <footer>
         <p>&copy; 2026 Seu Nome. Todos os direitos reservados.</p>
     </footer>

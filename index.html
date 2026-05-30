@@ -2,7 +2,8 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Portfólio 2</title>
+    <title>Eng Andre Belem</title>
+    
     <style>
         /* Configurações Globais */
         * {
@@ -210,8 +211,75 @@
             .nav-links { display: none; } /* Simplificação para mobile */
         }
     </style>
+
+    <style> /* Estilo para os icones sociais*/
+    /* Container dos ícones */
+    .social-float{
+        position: fixed;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        z-index: 9999;
+    }
+
+    /* Botões */
+    .social-float a{
+        width:60px;
+        height:60px;
+        border-radius:50%;
+        background:#fff;
+        box-shadow:0 4px 10px rgba(0,0,0,0.25);
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        transition:0.3s;
+        text-decoration:none;
+    }
+
+    .social-float a:hover{
+        transform:scale(1.15);
+    }
+
+    /* Imagens */
+    .social-float img{
+        width:34px;
+        height:34px;
+        object-fit:contain;
+    }
+</style>/* Fim do Estilo para os icones sociais*/
+
 </head>
 <body>
+    <!-- Botões das Redes Sociais -->
+    <div class="social-float">
+        <a href="https://www.linkedin.com/in/andre-belem-br" target="_blank">
+            <img src="imgs/linkedin.png" alt="Facebook">
+        </a>
+
+        <a href="https://www.instagram.com/andre.belem.br/" target="_blank">
+            <img src="imgs/instagram.png" alt="Facebook">
+        </a>
+
+        <a href="https://www.facebook.com/belem.andre" target="_blank">
+            <img src="imgs/facebook.png" alt="Facebook">
+        </a>
+
+        <a href="https://www.youtube.com/@andre-belem" target="_blank">
+            <img src="imgs/youtube.png" alt="YouTube">
+        </a>
+
+        <a href="https://github.com/andre-belem" target="_blank">
+            <img src="imgs/github.png" alt="GitHub">
+        </a>
+
+        <a href="https://wa.me/5541995883231" target="_blank">
+            <img src="imgs/whatsapp.png" alt="WhatsApp">
+        </a>
+
+    </div>
 
     <!-- Cabeçalho -->
     <header>
@@ -246,7 +314,7 @@
             </ul>
         </p>
             
-        <p><i>site em desenvolvimento, última atualizaçãoo: 29/05/2026</i></p>
+        <p><i>site em desenvolvimento, última atualizaçãoo: 30/05/2026</i></p>
 
         <a href="#projects" class="btn">Ver Meus Projetos</a>
     </section>

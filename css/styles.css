@@ -49,6 +49,12 @@ header {
     color: #ffffff;
 }
 
+.nav-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffffff;
+    align-self: center;
+}
 .nav-links {
     display: flex;
     color: #ffffff;

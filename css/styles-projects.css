@@ -1,0 +1,208 @@
+/* 1. FIXED DARK THEME VARIABLES */
+:root {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --panel-bg: #1e1e1e;
+    --panel-border: #2d2d2d;
+    --card-bg: #1d1d1d;
+    --card-shadow: rgba(0, 0, 0, 0.3);
+    --link-hover: orange;
+}
+
+/* 2. BASE LAYOUT STYLES */
+body {
+    margin: 0;
+    padding-top: 60px; /* Offset for the fixed top panel */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* 3. FIXED TOP PANEL */
+.fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    
+    /* 1. Change display to grid with 3 equal columns */
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr; 
+    align-items: center;
+    
+    padding: 0 24px;
+    box-sizing: border-box;
+    background-color: var(--panel-bg);
+    border-bottom: 1px solid var(--panel-border);
+    z-index: 1000;
+}
+
+/* 2. CENTERED TITLE STYLES */
+.header-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--text-color);
+    justify-self: center; /* Centers the title perfectly in the middle column */
+    text-align: center;
+}
+
+.header-title a{
+    font-size: 1.5rem;
+    color: var(--link-hover);
+}
+/* Right side spacer to keep the grid balanced */
+.header-right {
+    justify-self: end; /* Aligns content to the far right */
+}
+
+.header-right a {
+    color: #ffffff; /* Ou simplesmente: white */
+    text-decoration: none; /* Opcional: remove o sublinhado padrão de links */
+    transition: color 0.5s ease, color 0.5s ease;
+}
+.header-right a:hover {
+    color: var(--link-hover);
+}
+
+/* Left side alignment */
+.logo {
+    font-weight: 700;
+    font-size: 2.25rem;
+    letter-spacing: 0.5px;
+    justify-self: start; /* Pushes logo to the far left */
+    color: #fff;
+}
+
+.logo a {
+    color: #ffffff; /* Ou simplesmente: white */
+    text-decoration: none; /* Opcional: remove o sublinhado padrão de links */
+    transition: color 0.5s ease, color 0.5s ease;
+}
+
+.logo a:hover {
+    color: var(--link-hover);
+}
+
+/* 4. MAIN PAGE CONTAINER SPLIT */
+.app-container {
+    display: flex;
+    min-height: calc(100vh - 60px);
+}
+
+/* 5. FIXED LEFT SIDEBAR MENU */
+.left-sidebar {
+    position: fixed;
+    top: 60px; /* Starts exactly below the top panel */
+    left: 0;
+    width: 260px;
+    height: calc(100vh - 60px); /* Fills remaining height */
+    background-color: var(--panel-bg);
+    border-right: 1px solid var(--panel-border);
+    padding: 24px;
+    box-sizing: border-box;
+    overflow-y: auto; /* Adds scrollbar inside menu if items overflow */
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-menu li {
+    margin-bottom: 12px;
+}
+
+.sidebar-menu a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    display: block;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: background-color 0.5s, color 0.5s;
+    transition: color 0.5s ease, color 0.5s ease;
+}
+
+.sidebar-menu a:hover {
+    background-color: var(--bg-color);
+    color: var(--link-hover);
+}
+
+/* 6. MAIN CONTENT AREA */
+.main-content {
+    margin-left: 260px; /* Offsets the width of the fixed sidebar */
+    padding: 40px;
+    width: 100%;
+    max-width: 900px;
+    box-sizing: border-box;
+}
+
+/* 7. CARD COMPONENT STYLES */
+.topic-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 32px;
+    box-shadow: 0 4px 6px var(--card-shadow);
+    scroll-margin-top: 80px; /* Smooth scroll offset so header doesn't cover card title */
+}
+
+.topic-card h2 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-size: 1.5rem;
+}
+
+.topic-card p {
+    line-height: 1.6;
+    margin-bottom: 0;
+    opacity: 0.9;
+}
+
+.topic-card a {
+    color: #ffffff; /* Ou simplesmente: white */
+    text-decoration: none; /* Opcional: remove o sublinhado padrão de links */
+}
+
+/* Smooth Scrolling Effect */
+html {
+    scroll-behavior: smooth;
+}
+
+.badge{
+    display:inline-block;
+    background:#ff810c;
+    color: black;
+    padding:6px 12px;
+    border-radius:999px
+}
+
+
+.code {
+background-color: #1e1e1e; /* Deep dark background */
+color: #1cbe3f;            /* Default text color */
+font-family: 'Fira Code', 'Courier New', Courier, monospace;
+font-size: 14px;
+line-height: 1.5;
+padding: 16px;
+border-radius: 8px;
+overflow-x: auto;          /* Enables scrolling for long lines */
+border: 1px solid #333;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.code-response {
+background-color: #1e1e1e; /* Deep dark background */
+color: #ffffff;            /* Default text color */
+font-family: 'Fira Code', 'Courier New', Courier, monospace;
+font-size: 14px;
+line-height: 1.5;
+padding: 16px;
+border-radius: 8px;
+overflow-x: auto;          /* Enables scrolling for long lines */
+border: 1px solid #333;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}

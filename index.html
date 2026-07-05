@@ -4,27 +4,21 @@
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eng Andre Belem</title>
     <link rel="stylesheet" href="css/styles.css">
-
 </head>
 <body>
-    <!-- Cabeçalho -->
-    <header>
-        <nav class="nav-container">
-            <div class="logo"><h2>
-<!--                 <a href="#home">
-                    <img src="imgs/logo.png" alt="Logo">
-                </a> -->
-            andre.belem.br</h2>
-            </div>
+    <!-- Fixed Top Panel with Centered Title -->
+    <header class="fixed-header">
+        <div class="logo"><a>andre.belem.br</a></div>
+        <div class="header-title"><a></a></div> <!-- Centered Title -->
+        <div class="header-right">
             <ul class="nav-links">
                 <li><a href="#home">Início</a></li>
                 <li><a href="#about">Sobre</a></li>
                 <li><a href="#projects">Projetos</a></li>
-                <li><a href="html5-canvas/index.html">HTML5 Canvas</a></li>
-                <li><a href="genesis/genesis.html">Servidor Cloud</a></li>
                 <li><a href="#contact">Contato</a></li>
             </ul>
-        </nav>
+
+        </div> <!-- Empty spacer to balance the layout -->
     </header>
 
     <!-- Home -->
@@ -67,16 +61,16 @@
             <div class="project-card">
                 <div class="project-img">
                     <a href="genesis/genesis.html">
-                        <img src="imgs/pj_genesis_en.png" alt="PJ Genesis" width="100%" height="200">
+                        <img src="imgs/pj_genesis_en.png" alt="PJ Genesis" width="333" height="200">
                     </a>                    
                 </div>
                 <div class="project-info">
                     <div style="display: flex; justify-content: space-between; align-items: baseline;">
-                        <h3>Projeto Genesis</h3>
+                        <h3>Genesis: HTTP Server</h3>
                         <span>Junho/26</span>
                     </div>
                     <p>Implantação deste Servidor Web, Registro de Domínio, VPS Cloud, stack LAMP, DNS, Permissões e Usuários </p>
-                    <p><br><b>Conhecimentos: </b>Budget, AlmaLinux, Back-end, Front-end.</p>
+                    <p><br><b>Conhecimentos: </b>Administrador de Sistemas, AlmaLinux, DNS, HTTP Server, Banco de Dados</p>
                 </div>
             </div>
 
@@ -92,7 +86,7 @@
                         <h3>Telemetria Remota</h3>
                         <span>Julho/26</span>
                     </div>
-                    <p>Coleta de Dados de Sensores em tempo real, armanezamento em banco de dados e visualização em página web.</p>
+                    <p>Coleta de Dados de Sensores em tempo real, armanezamento em banco de dados e visualização em Dashboard.</p>
                     <p><br><b>Conhecimentos: </b>C/C++, Node.js, Javascript, MySql Database, Dashboards.</p>
                 </div>
             </div>

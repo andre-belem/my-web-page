@@ -1,25 +1,23 @@
-
-
 /* 1. FIXED DARK THEME VARIABLES */
 :root {
-    --bg-color: #121212;
-    --text-color: #e0e0e0;
-    --panel-bg: #1e1e1e;
-    --panel-border: #2d2d2d;
-    --card-bg: #1d1d1d;
-    --card-shadow: rgba(0, 0, 0, 0.3);
-    --link-hover: orange;
-    --btn-hover: rgb(0, 0, 0);
-    --btn-color: #3c4044;
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --panel-bg: #1e1e1e;
+  --panel-border: #2d2d2d;
+  --card-bg: #1d1d1d;
+  --card-shadow: rgba(0, 0, 0, 0.3);
+  --link-hover: orange;
+  --btn-hover: rgb(0, 0, 0);
+  --btn-color: #3c4044;
 }
 
 /* Configurações Globais */
 * {
-    margin: 0;
-    padding-top: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    scroll-behavior: smooth;
+  margin: 0;
+  padding-top: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  scroll-behavior: smooth;
 }
 
 * {
@@ -30,120 +28,129 @@
 
 /* 3. FIXED TOP PANEL */
 .fixed-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 60px;
-    
-    /* 1. Change display to grid with 3 equal columns */
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr; 
-    align-items: center;
-    
-    padding: 0 24px;
-    box-sizing: border-box;
-    background-color: var(--panel-bg);
-    border-bottom: 1px solid var(--panel-border);
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+
+  /* 1. Change display to grid with 3 equal columns */
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  align-items: center;
+
+  padding: 0 24px;
+  box-sizing: border-box;
+  background-color: var(--panel-bg);
+  border-bottom: 1px solid var(--panel-border);
+  z-index: 1000;
 }
 
 
 .header-title {
-    font-weight: 600;
-    font-size: 1.1rem;
-    color: var(--text-color);
-    justify-self: center; /* Centers the title perfectly in the middle column */
-    text-align: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--text-color);
+  justify-self: center;
+  /* Centers the title perfectly in the middle column */
+  text-align: center;
 }
 
-.header-title a{
-    font-size: 1.5rem;
-    color: var(--link-hover);
+.header-title a {
+  font-size: 1.5rem;
+  color: var(--link-hover);
 }
+
 /* Right side spacer to keep the grid balanced */
 .header-right {
-    justify-self: end; /* Aligns content to the far right */
+  justify-self: end;
+  /* Aligns content to the far right */
 }
 
 .header-right a {
-    color: #ffffff; /* Ou simplesmente: white */
-    text-decoration: none; /* Opcional: remove o sublinhado padrão de links */
-    transition: color 0.5s ease, color 0.5s ease;
+  color: #ffffff;
+  /* Ou simplesmente: white */
+  text-decoration: none;
+  /* Opcional: remove o sublinhado padrão de links */
+  transition: color 0.5s ease, color 0.5s ease;
 }
+
 .header-right a:hover {
-    color: var(--link-hover);
+  color: var(--link-hover);
 }
 
 /* Left side alignment */
 .logo {
-    font-weight: 700;
-    font-size: 2.25rem;
-    letter-spacing: 0.5px;
-    justify-self: start; /* Pushes logo to the far left */
+  font-weight: 700;
+  font-size: 2.25rem;
+  letter-spacing: 0.5px;
+  justify-self: start;
+  /* Pushes logo to the far left */
 }
 
 .logo a {
-    color: white; /* Ou simplesmente: white */
-    text-decoration: none; /* Opcional: remove o sublinhado padrão de links */
-    transition: color 0.5s ease, color 0.5s ease;
+  color: white;
+  /* Ou simplesmente: white */
+  text-decoration: none;
+  /* Opcional: remove o sublinhado padrão de links */
+  transition: color 0.5s ease, color 0.5s ease;
 }
 
 .logo a:hover {
-    color: var(--link-hover);
+  color: var(--link-hover);
 }
 
 #home {
-    align-items: center;
-    text-align: center;
-    padding-top: 60px;
+  align-items: center;
+  text-align: center;
+  padding-top: 60px;
 }
 
 #sobre {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-top: 60px;
 }
 
 /* Seção Gerais */
 section {
-    padding: 10px 10px 10px 10px;
-    max-width: 1100px;
-    margin: 0 auto;
+  padding: 10px 10px 10px 10px;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 .section-title {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 2rem;
-    position: relative;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  position: relative;
 }
 
 .section-title::after {
-    content: '';
-    display: block;
-    width: 50px;
-    height: 4px;
-    background-color: var(--link-hover);
-    margin: 10px auto 0 auto;
-    border-radius: 2px;
+  content: '';
+  display: block;
+  width: 50px;
+  height: 4px;
+  background-color: var(--link-hover);
+  margin: 10px auto 0 auto;
+  border-radius: 2px;
 }
 
 /* Seção Sobre */
 .about-content {
-    font-size: 1.2rem;
-    margin: 0 auto;
-    text-align: center;
+  font-size: 1.2rem;
+  margin: 0 auto;
+  text-align: center;
 }
 
 /* Seção Projetos */
 .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
 }
 
 main {
@@ -156,6 +163,7 @@ main {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 10px;
 }
+
 .top {
   position: relative;
   background: black;
@@ -382,12 +390,13 @@ main {
 }
 
 #canvas-id {
-  cursor:crosshair;
+  cursor: crosshair;
 }
 
 
 .slidecontainer {
-  width: 10%; /* Width of the outside container */
+  width: 10%;
+  /* Width of the outside container */
 }
 
 /* The slider itself */
@@ -396,71 +405,93 @@ main {
   margin: 1 auto;
   display: flex;
   flex-grow: 1;
-  -webkit-appearance: none;  /* Override default CSS styles */
+  -webkit-appearance: none;
+  /* Override default CSS styles */
   appearance: none;
-  width: 100%; /* Full-width */
-  height: 25px; /* Specified height */
-  background: #d3d3d3; /* Grey background */
-  outline: none; /* Remove outline */
-  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
-  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  width: 100%;
+  /* Full-width */
+  height: 25px;
+  /* Specified height */
+  background: #d3d3d3;
+  /* Grey background */
+  outline: none;
+  /* Remove outline */
+  opacity: 0.7;
+  /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s;
+  /* 0.2 seconds transition on hover */
   transition: opacity .2s;
 }
 
 /* Mouse-over effects */
 .slider:hover {
-  opacity: 1; /* Fully shown on mouse-over */
+  opacity: 1;
+  /* Fully shown on mouse-over */
 }
 
-/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */ 
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
 .slider::-webkit-slider-thumb {
-  -webkit-appearance: none; /* Override default look */
+  -webkit-appearance: none;
+  /* Override default look */
   appearance: none;
-  width: 25px; /* Set a specific slider handle width */
-  height: 25px; /* Slider handle height */
-  background: #04AA6D; /* Green background */
-  cursor: pointer; /* Cursor on hover */
+  width: 25px;
+  /* Set a specific slider handle width */
+  height: 25px;
+  /* Slider handle height */
+  background: #04AA6D;
+  /* Green background */
+  cursor: pointer;
+  /* Cursor on hover */
 }
 
 .slider::-moz-range-thumb {
-  width: 25px; /* Set a specific slider handle width */
-  height: 25px; /* Slider handle height */
-  background: #04AA6D; /* Green background */
-  cursor: pointer; /* Cursor on hover */
+  width: 25px;
+  /* Set a specific slider handle width */
+  height: 25px;
+  /* Slider handle height */
+  background: #04AA6D;
+  /* Green background */
+  cursor: pointer;
+  /* Cursor on hover */
 }
 
 #frame {
-  width: 960px; 
+  width: 960px;
   height: 60px;
-  position: relative; 
+  position: relative;
   margin: auto;
 }
+
 #frame div {
-  position: absolute; 
-  width: 240px; 
+  position: absolute;
+  width: 240px;
   height: 100%;
   border: 1px solid #e0e0e0;
   margin: 0px;
   text-align: center;
 }
+
 #frame-angle {
-  left: 0px; 
-  top: 0px; 
-}
-#frame-height {
-  left: 240px;  
-  top: 0px; 
-}
-#frame-width {
-  left: 480px; 
-  top: 0px; 
-}
-#frame-depth {
-  left: 720px; 
-  top: 0px; 
+  left: 0px;
+  top: 0px;
 }
 
-p{
+#frame-height {
+  left: 240px;
+  top: 0px;
+}
+
+#frame-width {
+  left: 480px;
+  top: 0px;
+}
+
+#frame-depth {
+  left: 720px;
+  top: 0px;
+}
+
+p {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
@@ -468,9 +499,52 @@ p{
 
 /* Rodapé */
 footer {
-    background-color: #343a40;
-    color: #fff;
-    text-align: center;
-    padding: 20px;
-    margin-top: 40px;
+  background-color: #343a40;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+}
+
+
+
+/* STYLE PARA MOSTRAR A LISTA DE DIRETORIOS */
+.explorer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 15px;
+  padding: 20px;
+  background-color: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.grid-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.grid-item .icon {
+  font-size: 40px;
+  margin-bottom: 8px;
+  user-select: none;
+}
+
+.grid-item .item-name {
+  font-size: 12px;
+  color: #333333;
+  word-break: break-word;
+  max-width: 90px;
+}
+
+.grid-item:hover {
+  background-color: #e5f3ff;
+  border-color: #b8e0e0;
 }

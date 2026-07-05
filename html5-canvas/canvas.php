@@ -113,31 +113,42 @@
     <section id="about">
         <h2 class="section-title">Conteúdo do Curso</h2>
         <div class="about-content">
-        <ul>
-            <?php
-            // Define o caminho como o diretório atual
-            $diretorioAtual = __DIR__;
+            <div class="explorer-grid">
+                <?php
+                // Define qual diretório o PHP deve ler ('.' significa a pasta atual onde está o script)
+                $diretorio = '.';
 
-            // Abre o diretório atual
-            if ($oDiretorio = opendir($diretorioAtual)) {
-                
-                // Varre elemento por elemento do diretório
-                while (($item = readdir($oDiretorio)) !== false) {
-                    
-                    // Ignora o próprio diretório (.) e o diretório pai (..)
-                    if ($item != '.' && $item != '..') {
-                        
-                        // Verifica se o item encontrado é realmente uma pasta (diretório)
-                        if (is_dir($diretorioAtual . '/' . $item)) {
-                            echo "li<span>📁 " . htmlspecialchars($item) . "/span/li";
-                        }
+                // Função que varre a pasta e retorna um array com os arquivos e subpastas
+                $itens = scandir($diretorio);
+
+                foreach ($itens as $item) {
+                    // Ignora os caminhos ocultos do sistema ('.' e '..')
+                    if ($item === '.' || $item === '..') {
+                        continue;
                     }
+
+                    // Monta o caminho completo do item atual
+                    $caminhoCompleto = $diretorio . '/' . $item;
+
+                    // NOVO: Se NÃO for uma pasta, pula este item e não mostra na tela
+                    if (!is_dir($caminhoCompleto)) {
+                        continue;
+                    }
+
+                    // Como agora só entram pastas, definimos o ícone fixo de diretório
+                    $classe = 'folder';
+                    $icone = '📁';
+
+                    // Exibe apenas as pastas com seus respectivos links de abertura
+                    echo '<a href="' . $caminhoCompleto . '" style="text-decoration: none; color: inherit;">';
+                    echo '  <div class="grid-item ' . $classe . '">';
+                    echo '    <div class="icon">' . $icone . '</div>';
+                    echo '    <span class="item-name">' . htmlspecialchars($item) . '</span>';
+                    echo '  </div>';
+                    echo '</a>';
                 }
-                // Fecha a leitura do diretório
-                closedir($oDiretorio);
-            }
-            ?>
-        </ul>
+                ?>
+            </div>
         </div>
     </section>
 

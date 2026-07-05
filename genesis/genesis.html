@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Genesis: HTTP Server</title>
@@ -11,12 +12,13 @@
     <header class="fixed-header">
         <div class="logo"><a href="http://andre.belem.br">andre.belem.br</a></div>
         <div class="header-title"><a>Project Genesis: HTTP Server</a></div> <!-- Centered Title -->
-        <div class="header-right"><a href="http://andre.belem.br">Voltar</a></div> <!-- Empty spacer to balance the layout -->
+        <div class="header-right"><a href="http://andre.belem.br">Voltar</a></div>
+        <!-- Empty spacer to balance the layout -->
     </header>
 
     <!-- App Container -->
     <div class="app-container">
-        
+
         <!-- Fixed Left Menu (Sidebar) -->
         <aside class="left-sidebar">
             <ul class="sidebar-menu">
@@ -27,6 +29,7 @@
                 <li><a href="#dns">Configuração do DNS</a></li>
                 <li><a href="#apache">Apache HTTP Server</a></li>
                 <li><a href="#mysql">Banco de Dados MySQL</a></li>
+                <li><a href="#php">Instalação do PHP</a></li>
             </ul>
         </aside>
 
@@ -35,33 +38,66 @@
 
             <!-- Descrição do Projeto -->
             <section class="topic-card" id="inicio"><span class="badge">Documentation</span>
-                <h1>Projeto Gênesis</h1> 
-                <p> <h3>1. O que é e como funciona a contratação de um domínio?</h3>O domínio é o endereço do seu site na internet (como ://seusite.com.br). Ele serve para que as pessoas não precisem digitar um número de IP complexo no navegador.Onde registrar: O registro é feito em empresas chamadas "registradoras". No Brasil, o órgão oficial para domínios .br é o Registro.br. Para domínios internacionais (como .com, .net), usam-se empresas como Namecheap, GoDaddy ou HostGator.Pagamento: O domínio não é comprado de forma definitiva. Você paga uma anuidade para ter o direito de uso daquele nome.Disponibilidade: Antes de comprar, você deve pesquisar se o nome desejado já não foi registrado por outra pessoa.
-                    <h3>2. Preparando o Servidor LinuxPara o site funcionar</h3> Você precisa de um computador ligado 24 horas por dia conectado à internet. Geralmente, contrata-se um servidor virtual na nuvem (chamado de VPS) em provedores como DigitalOcean, AWS, Google Cloud ou Linode.Ao criar esse servidor, escolhe-se uma distribuição Linux (sendo o Ubuntu Server ou o Debian as opções mais comuns e fáceis de usar).O acesso ao servidor é feito de forma segura e por linhas de comando através de um protocolo chamado SSH (Secure Shell).
-                    <h3>3. Configurando o Servidor WebCom o servidor Linux acessado,</h3> o trabalho consiste em instalar e configurar os programas que vão processar e entregar as páginas web aos visitantes. O processo padrão envolve:Instalar o Servidor Web: Os programas mais utilizados para isso são o Apache ou o Nginx. Eles interceptam os acessos vindos da internet e mostram os arquivos do seu site.Instalar o Banco de Dados e Linguagens: Se o site for dinâmico (como um WordPress), instala-se o interpretador da linguagem (geralmente PHP or Node.js) e um banco de dados (como MySQL ou MariaDB). Esse conjunto de ferramentas no Linux é conhecido pela sigla LAMP ou LEMP.Configurar as Pastas: Os arquivos do site (HTML, CSS, imagens) são colocados em uma pasta específica do Linux (geralmente em /var/www/).
-                    <h3>4. Apontando o Domínio para o Servidor (DNS)</h3> de ter o domínio comprado e o servidor Linux pronto, você precisa "conectar" os dois. Isso é feito através do DNS (Sistema de Nomes de Domínio).Você pegará o número de IP público do seu servidor Linux.No painel onde você comprou o domínio, você criará um Apontamento do Tipo A.Esse apontamento diz basicamente o seguinte para a internet: "Quando alguém digitar seusite.com.br, envie essa pessoa para o IP X.X.X.X".
-                    <h3>5. Segurança (Certificado SSL)</h3> fim, nenhum site moderno pode rodar sem segurança. É necessário instalar um certificado digital para que o site use o protocolo seguro HTTPS (o famoso cadeado verde na barra do navegador).No Linux, isso costuma ser feito de forma gratuita usando uma ferramenta chamada Certbot, que gera e renova os certificados da entidade Let's Encrypt automaticamente. </p>
+                <h1>Projeto Gênesis</h1>
+                <p>
+                <h3>1. O que é e como funciona a contratação de um domínio?</h3>O domínio é o endereço do seu site na
+                internet (como ://seusite.com.br). Ele serve para que as pessoas não precisem digitar um número de IP
+                complexo no navegador.Onde registrar: O registro é feito em empresas chamadas "registradoras". No
+                Brasil, o órgão oficial para domínios .br é o Registro.br. Para domínios internacionais (como .com,
+                .net), usam-se empresas como Namecheap, GoDaddy ou HostGator.Pagamento: O domínio não é comprado de
+                forma definitiva. Você paga uma anuidade para ter o direito de uso daquele nome.Disponibilidade: Antes
+                de comprar, você deve pesquisar se o nome desejado já não foi registrado por outra pessoa.
+                <h3>2. Preparando o Servidor LinuxPara o site funcionar</h3> Você precisa de um computador ligado 24
+                horas por dia conectado à internet. Geralmente, contrata-se um servidor virtual na nuvem (chamado de
+                VPS) em provedores como DigitalOcean, AWS, Google Cloud ou Linode.Ao criar esse servidor, escolhe-se uma
+                distribuição Linux (sendo o Ubuntu Server ou o Debian as opções mais comuns e fáceis de usar).O acesso
+                ao servidor é feito de forma segura e por linhas de comando através de um protocolo chamado SSH (Secure
+                Shell).
+                <h3>3. Configurando o Servidor WebCom o servidor Linux acessado,</h3> o trabalho consiste em instalar e
+                configurar os programas que vão processar e entregar as páginas web aos visitantes. O processo padrão
+                envolve:Instalar o Servidor Web: Os programas mais utilizados para isso são o Apache ou o Nginx. Eles
+                interceptam os acessos vindos da internet e mostram os arquivos do seu site.Instalar o Banco de Dados e
+                Linguagens: Se o site for dinâmico (como um WordPress), instala-se o interpretador da linguagem
+                (geralmente PHP or Node.js) e um banco de dados (como MySQL ou MariaDB). Esse conjunto de ferramentas no
+                Linux é conhecido pela sigla LAMP ou LEMP.Configurar as Pastas: Os arquivos do site (HTML, CSS, imagens)
+                são colocados em uma pasta específica do Linux (geralmente em /var/www/).
+                <h3>4. Apontando o Domínio para o Servidor (DNS)</h3> de ter o domínio comprado e o servidor Linux
+                pronto, você precisa "conectar" os dois. Isso é feito através do DNS (Sistema de Nomes de Domínio).Você
+                pegará o número de IP público do seu servidor Linux.No painel onde você comprou o domínio, você criará
+                um Apontamento do Tipo A.Esse apontamento diz basicamente o seguinte para a internet: "Quando alguém
+                digitar seusite.com.br, envie essa pessoa para o IP X.X.X.X".
+                <h3>5. Segurança (Certificado SSL)</h3> fim, nenhum site moderno pode rodar sem segurança. É necessário
+                instalar um certificado digital para que o site use o protocolo seguro HTTPS (o famoso cadeado verde na
+                barra do navegador).No Linux, isso costuma ser feito de forma gratuita usando uma ferramenta chamada
+                Certbot, que gera e renova os certificados da entidade Let's Encrypt automaticamente. </p>
 
-                <p><b>Conhecimentos:</b> SysAdmin (Administrador de Sistemas): Focado em manter os servidores, redes e serviços funcionando corretamente. 
-                É a figura tradicional que configura servidores web, gerencia usuários, cuida de backups e prepara o ambiente para receber a aplicação de forma estável.</p>
+                <p><b>Conhecimentos:</b> SysAdmin (Administrador de Sistemas): Focado em manter os servidores, redes e
+                    serviços funcionando corretamente.
+                    É a figura tradicional que configura servidores web, gerencia usuários, cuida de backups e prepara o
+                    ambiente para receber a aplicação de forma estável.</p>
             </section>
 
             <!-- Registro do Domínio -->
             <section class="topic-card" id="domain">
                 <h2>Registro do Domínio</h2>
-                <p>Aqui tivemos uma feliz coincidência: o órgão responsável pelos registros de domínios .br é o nic.br , 
-                    Ele cuida do DNS no Brasil, e dentro das diversas categorias, eles têm subdomínios por cidade, e temos uma cidade com o meu sobrenome, 
-                    por sorte, a palavra andre estava disponível dentro do domínio belem.br , assim, consegui registrar o domínio: andre.belem.br<br><br></p>
+                <p>Aqui tivemos uma feliz coincidência: o órgão responsável pelos registros de domínios .br é o nic.br ,
+                    Ele cuida do DNS no Brasil, e dentro das diversas categorias, eles têm subdomínios por cidade, e
+                    temos uma cidade com o meu sobrenome,
+                    por sorte, a palavra andre estava disponível dentro do domínio belem.br , assim, consegui registrar
+                    o domínio: andre.belem.br<br><br></p>
                 <img alt="" src="images/image5.png" style="width: 775.50px;">
             </section>
 
             <!-- Provedores de Cloud -->
             <section class="topic-card" id="cloud">
                 <h2>Provedor de Cloud</h2>
-                <p>Os grandes players do mercado, AWS, Google Cloud e Azure oferecem segurança e estabilidade, mas podem facilmente sair de controle orçamentário, pois
-                    além de cobrar a máquina virtual, tambem incluem custos como tráfego, banco de dados e serviços específicos.<br><br></p>
+                <p>Os grandes players do mercado, AWS, Google Cloud e Azure oferecem segurança e estabilidade, mas podem
+                    facilmente sair de controle orçamentário, pois
+                    além de cobrar a máquina virtual, tambem incluem custos como tráfego, banco de dados e serviços
+                    específicos.<br><br></p>
                 <img alt="" src="images/image9.png" style="width: 775.50px;">
-                <p>Temos opções de Virtualização mais economicas e com preço fixo indendente dos serviços ou uso da VM, por se tratar de um projeto
+                <p>Temos opções de Virtualização mais economicas e com preço fixo indendente dos serviços ou uso da VM,
+                    por se tratar de um projeto
                     pessoal, procurou-se um equilibrio entre preço e estabilidade.<br><br></p>
                 <img alt="" src="images/image15.png" style="width: 775.50px;">
             </section>
@@ -69,141 +105,160 @@
             <!-- Latência de resposta -->
             <section class="topic-card" id="latencia">
                 <h2>Latência</h2>
-                <p>Esse foi o fator decisivo. A LocaWeb mostrou instabilidade já na página de compra e foi descartada. Entre as duas outras opções, o Server Farm da Hostinger 
-                    fica nos Estados Unidos, o que gera uma grande latência. A diferença de performance da HostGator é na ordem de 10 vezes melhor.<br><br></p>
-                    <img alt="" src="images/image14.png" style="width: 775.50px;">
-                <p>A intenção é utilizar esse servidor para aplicações de IoT em tempo real, uma baixa latência melhora o tempo de resposta e eficiência do sistema,
+                <p>Esse foi o fator decisivo. A LocaWeb mostrou instabilidade já na página de compra e foi descartada.
+                    Entre as duas outras opções, o Server Farm da Hostinger
+                    fica nos Estados Unidos, o que gera uma grande latência. A diferença de performance da HostGator é
+                    na ordem de 10 vezes melhor.<br><br></p>
+                <img alt="" src="images/image14.png" style="width: 775.50px;">
+                <p>A intenção é utilizar esse servidor para aplicações de IoT em tempo real, uma baixa latência melhora
+                    o tempo de resposta e eficiência do sistema,
                     portanto, a HostGator foi a opção escolhida.</p>
             </section>
 
             <!-- Sistema Operacional -->
             <section class="topic-card" id="os">
                 <h2>Sistema Operacional</h2>
-                <p>O AlmaLinux é uma distribuição Linux de nível empresarial, de código aberto, focada em estabilidade, segurança e suporte comunitário. 
-                    Ele é compatível binariamente com o Red Hat Enterprise Linux (RHEL), servindo como uma alternativa gratuita, robusta e de longo prazo, 
+                <p>O AlmaLinux é uma distribuição Linux de nível empresarial, de código aberto, focada em estabilidade,
+                    segurança e suporte comunitário.
+                    Ele é compatível binariamente com o Red Hat Enterprise Linux (RHEL), servindo como uma alternativa
+                    gratuita, robusta e de longo prazo,
                     ideal para servidores e produção.<br><br></p>
-                    <img alt="" src="images/image16.png" style="width: 775.50px;">
+                <img alt="" src="images/image16.png" style="width: 775.50px;">
             </section>
 
             <!-- Apontamento do DNS -->
-            <section class="topic-card"  id="dns">
+            <section class="topic-card" id="dns">
                 <h2>Configuração do DNS</h2>
-                <p>Agora que temos o servidor na nuvem com enderçeo IP Fixo, configuramos o DNS no Registro.br para redirecionar o site andre.belem.br 
+                <p>Agora que temos o servidor na nuvem com enderçeo IP Fixo, configuramos o DNS no Registro.br para
+                    redirecionar o site andre.belem.br
                     para o endereço IP da VM da HostGator.<br><br></p>
-                    <img alt="" src="images/image12.png" style="width: 775.50px;">
+                <img alt="" src="images/image12.png" style="width: 775.50px;">
             </section>
 
             <!-- Instalação do Apache -->
-            <section class="topic-card"  id="apache">
+            <section class="topic-card" id="apache">
                 <h2>Apache HTTP Server</h2>
-                <p>O Apache HTTP Server é um servidor web reconhecido por sua estabilidade, segurança e alto desempenho. Sendo um software de código aberto, 
-                    oferece flexibilidade por meio de módulos que permitem adicionar diversas funcionalidades conforme a necessidade. 
-                    É compatível com diferentes sistemas operacionais e tecnologias, facilitando a integração com aplicações web. Além disso, 
-                    conta com ampla documentação e uma comunidade ativa, tornando sua implantação e manutenção mais simples. Essas características 
+                <p>O Apache HTTP Server é um servidor web reconhecido por sua estabilidade, segurança e alto desempenho.
+                    Sendo um software de código aberto,
+                    oferece flexibilidade por meio de módulos que permitem adicionar diversas funcionalidades conforme a
+                    necessidade.
+                    É compatível com diferentes sistemas operacionais e tecnologias, facilitando a integração com
+                    aplicações web. Além disso,
+                    conta com ampla documentação e uma comunidade ativa, tornando sua implantação e manutenção mais
+                    simples. Essas características
                     fazem do Apache uma solução confiável para hospedar sites, APIs e sistemas corporativos.<br><br></p>
 
                 Atualizar o Sistema
-                <p class="code" >sudo dnf update -y</p>
+                <p class="code">sudo dnf update -y</p>
 
                 <br>Verificar se o serviço já está pré-instalado
-                <p class="code" >sudo systemctl status httpd</p>
+                <p class="code">sudo systemctl status httpd</p>
 
                 <p class="code-response">
-                Dependencies resolved.
-                Nothing to do.
-                Complete!</p>
+                    Dependencies resolved.
+                    Nothing to do.
+                    Complete!</p>
 
                 <br>Instalar o Servidor Apache
-                <p class="code" >sudo dnf install -y httpd</p>
+                <p class="code">sudo dnf install -y httpd</p>
                 <p class="code-response">
-                Installed:<br>
-                almalinux-logos-httpd-90.6-2.el9.noarch               apr-1.7.0-12.el9_3.x86_64<br>
-                apr-util-1.6.1-23.el9.x86_64                          apr-util-bdb-1.6.1-23.el9.x86_64<br>
-                apr-util-openssl-1.6.1-23.el9.x86_64                  httpd-2.4.62-7.el9_7.3.x86_64<br>
-                httpd-core-2.4.62-7.el9_7.3.x86_64                    httpd-filesystem-2.4.62-7.el9_7.3.noarch<br>
-                httpd-tools-2.4.62-7.el9_7.3.x86_64                   mod_http2-2.0.26-5.el9.x86_64<br>
-                mod_lua-2.4.62-7.el9_7.3.x86_64<br><br>
+                    Installed:<br>
+                    almalinux-logos-httpd-90.6-2.el9.noarch apr-1.7.0-12.el9_3.x86_64<br>
+                    apr-util-1.6.1-23.el9.x86_64 apr-util-bdb-1.6.1-23.el9.x86_64<br>
+                    apr-util-openssl-1.6.1-23.el9.x86_64 httpd-2.4.62-7.el9_7.3.x86_64<br>
+                    httpd-core-2.4.62-7.el9_7.3.x86_64 httpd-filesystem-2.4.62-7.el9_7.3.noarch<br>
+                    httpd-tools-2.4.62-7.el9_7.3.x86_64 mod_http2-2.0.26-5.el9.x86_64<br>
+                    mod_lua-2.4.62-7.el9_7.3.x86_64<br><br>
 
-                Complete!
+                    Complete!
                 </p>
 
                 <br>Iniciar o processo para escutar a porta 80
                 <p class="code">sudo systemctl start httpd</p>
-                
+
                 <br>Verificar o status do Servidor
-                <p class="code">sudo systemctl status httpd</p> 
+                <p class="code">sudo systemctl status httpd</p>
 
                 <p class="code-response">
-                ● httpd.service - The Apache HTTP Server<br>
+                    ● httpd.service - The Apache HTTP Server<br>
                     Loaded: loaded (/usr/lib/systemd/system/httpd.service; disabled; preset: disabled)<br>
                     Active: active (running) since Wed 2026-05-13 16:23:45 -03; 7s ago<br>
                     Docs: man:httpd.service(8)<br>
-                Main PID: 6421 (httpd)<br>
+                    Main PID: 6421 (httpd)<br>
                     Status: "Started, listening on: port 80"<br>
                     Tasks: 177 (limit: 10652)<br>
                     Memory: 15.0M (peak: 15.2M)<br>
-                        CPU: 27ms<br>
+                    CPU: 27ms<br>
                     CGroup: /system.slice/httpd.service<br>
-                            ├─6421 /usr/sbin/httpd -DFOREGROUND<br>
-                            ├─6422 /usr/sbin/httpd -DFOREGROUND<br>
-                            ├─6423 /usr/sbin/httpd -DFOREGROUND<br>
-                            ├─6424 /usr/sbin/httpd -DFOREGROUND<br>
-                            └─6425 /usr/sbin/httpd -DFOREGROUND<br>
+                    ├─6421 /usr/sbin/httpd -DFOREGROUND<br>
+                    ├─6422 /usr/sbin/httpd -DFOREGROUND<br>
+                    ├─6423 /usr/sbin/httpd -DFOREGROUND<br>
+                    ├─6424 /usr/sbin/httpd -DFOREGROUND<br>
+                    └─6425 /usr/sbin/httpd -DFOREGROUND<br>
                 </p>
                 <br>Página de Boas Vindas do Apache<br><br>
                 <img alt="" src="images/apache_running.png" style="width: 775.50px;">
                 <br><br>Servidor Up and Running!
             </section>
-            
+
             <!-- Instalação do MySQL -->
-            <section class="topic-card"  id="mysql">
+            <section class="topic-card" id="mysql">
                 <h2>Banco de Dados MySQL</h2>
-                <p>O MySQL é um sistema de gerenciamento de banco de dados relacional amplamente utilizado por sua velocidade, 
-                    confiabilidade e facilidade de administração. Sendo de código aberto, oferece excelente desempenho para 
-                    aplicações web e corporativas, além de suportar grandes volumes de dados com segurança. Sua compatibilidade 
-                    com diversas linguagens de programação e plataformas o torna uma solução versátil e eficiente para armazenar e 
+                <p>O MySQL é um sistema de gerenciamento de banco de dados relacional amplamente utilizado por sua
+                    velocidade,
+                    confiabilidade e facilidade de administração. Sendo de código aberto, oferece excelente desempenho
+                    para
+                    aplicações web e corporativas, além de suportar grandes volumes de dados com segurança. Sua
+                    compatibilidade
+                    com diversas linguagens de programação e plataformas o torna uma solução versátil e eficiente para
+                    armazenar e
                     gerenciar informações.</p>
-                
+
                 <br>Instalando o MySQL com dnf
-                <p class="code">sudo dnf install mysql-server -y</p> 
+                <p class="code">sudo dnf install mysql-server -y</p>
 
                 <p class="code-response">
                     Installed:<br>
-                    mariadb-connector-c-config-3.2.6-1.el9_0.noarch      mecab-0.996-3.el9.4.x86_64                mysql-8.0.45-1.el9_7.x86_64<br>
-                    mysql-common-8.0.45-1.el9_7.x86_64                   mysql-errmsg-8.0.45-1.el9_7.x86_64        mysql-selinux-1.0.14-1.el9_6.noarch<br>
-                    mysql-server-8.0.45-1.el9_7.x86_64                   protobuf-lite-3.14.0-17.el9_7.x86_64<br><br>
+                    mariadb-connector-c-config-3.2.6-1.el9_0.noarch mecab-0.996-3.el9.4.x86_64
+                    mysql-8.0.45-1.el9_7.x86_64<br>
+                    mysql-common-8.0.45-1.el9_7.x86_64 mysql-errmsg-8.0.45-1.el9_7.x86_64
+                    mysql-selinux-1.0.14-1.el9_6.noarch<br>
+                    mysql-server-8.0.45-1.el9_7.x86_64 protobuf-lite-3.14.0-17.el9_7.x86_64<br><br>
                     Complete!
                 </p>
 
                 <br>Inicie e ative o MySQL
-                <p class="code">sudo systemctl enable --now mysqld </p> 
+                <p class="code">sudo systemctl enable --now mysqld </p>
 
-                 <br>Verificando o status 
-                <p class="code">sudo systemctl status mysqld</p> 
+                <br>Verificando o status
+                <p class="code">sudo systemctl status mysqld</p>
 
                 <p class="code-response">
                     ● mysqld.service - MySQL 8.0 database server<br>
-                        Loaded: loaded (/usr/lib/systemd/system/mysqld.service; enabled; preset: disabled)<br>
-                        Active: active (running) since Wed 2026-05-13 16:40:39 -03; 4min 57s ago<br>
-                        Process: 7096 ExecStartPre=/usr/libexec/mysql-check-socket (code=exited, status=0/SUCCESS)<br>
-                        Process: 7118 ExecStartPre=/usr/libexec/mysql-prepare-db-dir mysqld.service (code=exited, status=0/SUCCESS)<br>
+                    Loaded: loaded (/usr/lib/systemd/system/mysqld.service; enabled; preset: disabled)<br>
+                    Active: active (running) since Wed 2026-05-13 16:40:39 -03; 4min 57s ago<br>
+                    Process: 7096 ExecStartPre=/usr/libexec/mysql-check-socket (code=exited, status=0/SUCCESS)<br>
+                    Process: 7118 ExecStartPre=/usr/libexec/mysql-prepare-db-dir mysqld.service (code=exited,
+                    status=0/SUCCESS)<br>
                     Main PID: 7190 (mysqld)<br>
-                        Status: "Server is operational"<br>
-                        Tasks: 38 (limit: 10652)<br>
-                        Memory: 486.2M (peak: 488.2M)<br>
-                            CPU: 2.207s<br>
-                        CGroup: /system.slice/mysqld.service<br>
-                                └─7190 /usr/libexec/mysqld --basedir=/usr<br><br>
+                    Status: "Server is operational"<br>
+                    Tasks: 38 (limit: 10652)<br>
+                    Memory: 486.2M (peak: 488.2M)<br>
+                    CPU: 2.207s<br>
+                    CGroup: /system.slice/mysqld.service<br>
+                    └─7190 /usr/libexec/mysqld --basedir=/usr<br><br>
 
                     May 13 16:40:34 vps-15335525.129.121.54.250 systemd[1]: Starting MySQL 8.0 database server...<br>
-                    May 13 16:40:34 vps-15335525.129.121.54.250 mysql-prepare-db-dir[7118]: Initializing MySQL database<br>
+                    May 13 16:40:34 vps-15335525.129.121.54.250 mysql-prepare-db-dir[7118]: Initializing MySQL
+                    database<br>
                     May 13 16:40:39 vps-15335525.129.121.54.250 systemd[1]: Started MySQL 8.0 database server.<br><br>
                     Complete!
                 </p><br><br>
 
                 <h2>Segurança da Instalação </h2>
-                Executando o script de segurança para definir a senha do root, remover usuários anônimos e bloquear login remoto do root. 
-                <p class="code">sudo mysql_secure_installation</p> 
+                Executando o script de segurança para definir a senha do root, remover usuários anônimos e bloquear
+                login remoto do root.
+                <p class="code">sudo mysql_secure_installation</p>
                 <p class="code-response">
                     Remove anonymous users? (Press y|Y for Yes, any other key for No) : y<br>
                     Success.<br><br>
@@ -211,7 +266,7 @@
                     Disallow root login remotely? (Press y|Y for Yes, any other key for No) : y<br>
                     Success.
 
-                    Remove test database and access to it? (Press y|Y for Yes, any other key for No)     <br>                                                          : y
+                    Remove test database and access to it? (Press y|Y for Yes, any other key for No) <br> : y
                     - Dropping test database...<br>
                     Success.<br><br>
 
@@ -224,15 +279,16 @@
                     Reload privilege tables now? (Press y|Y for Yes, any other key for No) : y<br>
                     Success.<br><br>
 
-                    
+
                     All done!
                 </p>
 
-                <br><br><h2>Teste de Conexão</h2>
-                <p class="code">mysql -u root -p</p> 
+                <br><br>
+                <h2>Teste de Conexão</h2>
+                <p class="code">mysql -u root -p</p>
                 <p class="code-response">
                     Enter password:<br>
-                    Welcome to the MySQL monitor.  Commands end with ; or \g.<br>
+                    Welcome to the MySQL monitor. Commands end with ; or \g.<br>
                     Your MySQL connection id is 16<br>
                     Server version: 8.0.45 Source distribution<br><br>
 
@@ -245,9 +301,51 @@
                     Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.<br><br>
 
                     mysql><br><br>
-                    
+
                     All done!
-                </p>                
+                </p>
+            </section>
+
+
+            <!-- Instalação do PHP -->
+            <section class="topic-card" id="php">
+                <h2>Instalação do PHP</h2>
+                <p>O PHP (Hypertext Preprocessor) é uma das linguagens de programação mais populares do mundo para o 
+                    desenvolvimento de sites e sistemas web dinâmicos.A principal característica do PHP é que ele é 
+                    uma linguagem server-side (executada no servidor). Isso significa que quando um usuário acessa uma página, 
+                    o servidor processa o código PHP, gera uma página HTML pura e a envia prontinha para o navegador do usuário.<br><br></p>
+
+                Atualizar o Sistema
+                <p class="code">sudo dnf update -y</p>
+
+                <br>Instalação dos módulos mais comuns
+                <p class="code">sudo dnf install php php-cli php-common php-mbstring php-xml php-gd php-json php-fpm -y
+                </p>
+
+                <p class="code-response">
+                    Installed:<br>
+                    gd-2.3.2-3.el9.x86_64<br>
+                    jbigkit-libs-2.1-23.el9.x86_64<br>
+                    libXpm-3.5.13-10.el9.x86_64<br>
+                    libtiff-4.4.0-18.el9_8.x86_64<br>
+                    libwebp-1.2.0-8.el9_3.x86_64<br>
+                    libxslt-1.1.34-14.el9_8.1.x86_64<br>
+                    nginx-filesystem-2:1.20.1-28.el9_8.3.alma.1.noarch<br>
+                    php-8.0.30-6.el9_8.x86_64<br>
+                    php-cli-8.0.30-6.el9_8.x86_64<br>
+                    php-common-8.0.30-6.el9_8.x86_64<br>
+                    php-fpm-8.0.30-6.el9_8.x86_64<br>
+                    php-gd-8.0.30-6.el9_8.x86_64<br>
+                    php-mbstring-8.0.30-6.el9_8.x86_64<br>
+                    php-opcache-8.0.30-6.el9_8.x86_64<br>
+                    php-pdo-8.0.30-6.el9_8.x86_64<br>
+                    php-xml-8.0.30-6.el9_8.x86_64<br><br>
+                    Complete!
+                </p>
+
+                <br>Reinicie o Apache
+                <p class="code">sudo systemctl restart httpd</p>
+                
             </section>
 
 

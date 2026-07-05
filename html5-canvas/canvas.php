@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5 Canvas</title>
+    <link href="style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <!-- Fixed Top Panel with Centered Title -->
+    <header class="fixed-header">
+        <div class="logo"><a href="http://andre.belem.br">andre.belem.br</a></div>
+        <div class="header-title"><a>HTML5 Canvas</a></div> <!-- Centered Title -->
+        <div class="header-right"><a href="http://andre.belem.br">Voltar</a></div>
+        <!-- Empty spacer to balance the layout -->
+    </header>
+
+
+
+    <!-- RESULTADO -->
+    <section id="home">
+        <h2 class="section-title">Resultado do Curso</h2>
+        <div class="about-content"></div>
+
+        <main>
+            <div class="left-block">
+                <!-- Colors -->
+                <div class="colors">
+                    <button type="button" value="#0000ff"></button>
+                    <button type="button" value="#009fff"></button>
+                    <button type="button" value="#0fffff"></button>
+                    <button type="button" value="#bfffff"></button>
+                    <button type="button" value="#000000"></button>
+                    <button type="button" value="#333333"></button>
+                    <button type="button" value="#666666"></button>
+                    <button type="button" value="#999999"></button>
+                    <button type="button" value="#ffcc66"></button>
+                    <button type="button" value="#ffcc00"></button>
+                    <button type="button" value="#ffff00"></button>
+                    <button type="button" value="#ffff99"></button>
+                    <button type="button" value="#003300"></button>
+                    <button type="button" value="#555000"></button>
+                    <button type="button" value="#00ff00"></button>
+                    <button type="button" value="#99ff99"></button>
+                    <button type="button" value="#f00000"></button>
+                    <button type="button" value="#ff6600"></button>
+                    <button type="button" value="#ff9933"></button>
+                    <button type="button" value="#f5deb3"></button>
+                    <button type="button" value="#330000"></button>
+                    <button type="button" value="#663300"></button>
+                    <button type="button" value="#cc6600"></button>
+                    <button type="button" value="#deb887"></button>
+                    <button type="button" value="#aa0fff"></button>
+                    <button type="button" value="#cc66cc"></button>
+                    <button type="button" value="#ff66ff"></button>
+                    <button type="button" value="#ff99ff"></button>
+                    <button type="button" value="#e8c4e8"></button>
+                    <button type="button" value="#ffffff"></button>
+                </div>
+
+                <!-- Buttons -->
+                <div class="buttons">
+                    <button id="interior" type="button">Interior</button>
+                    <button id="exterior" type="button">Exterior</button>
+                    <button id="scale" type="button">Scale</button>
+                    <button id="save" type="button">Save</button>
+                    <br>
+                    <p>Selected: <span id="id-txt-selected"></span></p>
+                    <p>Area: <span id="id-txt-area"></span> m<sup>2</sup></p>
+                    <p>Volume: <span id="id-txt-volume"></span> m<sup>3</sup></p>
+                </div>
+            </div>
+
+            <!-- Canvas -->
+            <div class="right-block">
+                <canvas id="canvas-id" width="800" height="600">
+
+                    YOUR BROWSER IS NOT SUPPORTING CANVAS, SORRY :(
+
+                </canvas>
+            </div>
+            <!-- Scripts -->
+            <script src="grow.js"></script>
+            <script src="frame.js"></script>
+            <script src="canvas-script.js"></script>
+        </main>
+        <!-- Sizing -->
+        <div id="frame">
+            <div id="frame-angle">
+                <p>Angle: <span id="demo"></span>°</p>
+                <input type="range" min="5" max="45" value="15" class="slider" id="myRange">
+            </div>
+            <div id="frame-height">
+                <p>Height: <span id="id-txt-height"></span>cm</p>
+                <input type="range" min="50" max="220" value="135" step="5" class="slider" id="id-slide-height">
+            </div>
+            <div id="frame-width">
+                <p>Width: <span id="id-txt-width"></span>cm</p>
+                <input type="range" min="40" max="120" value="80" step="5" class="slider" id="id-slide-width">
+            </div>
+            <div id="frame-depth">
+                <p>Depth: <span id="id-txt-depth"></span>cm</p>
+                <input type="range" min="40" max="120" value="60" step="5" class="slider" id="id-slide-depth">
+            </div>
+        </div>
+
+    </section>
+
+
+
+    <!-- Sobre -->
+    <section id="about">
+        <h2 class="section-title">Conteúdo do Curso</h2>
+        <div class="about-content">
+        <ul>
+            <?php
+            // Define o caminho como o diretório atual
+            $diretorioAtual = __DIR__;
+
+            // Abre o diretório atual
+            if ($oDiretorio = opendir($diretorioAtual)) {
+                
+                // Varre elemento por elemento do diretório
+                while (($item = readdir($oDiretorio)) !== false) {
+                    
+                    // Ignora o próprio diretório (.) e o diretório pai (..)
+                    if ($item != '.' && $item != '..') {
+                        
+                        // Verifica se o item encontrado é realmente uma pasta (diretório)
+                        if (is_dir($diretorioAtual . '/' . $item)) {
+                            echo "li<span>📁 " . htmlspecialchars($item) . "/span/li";
+                        }
+                    }
+                }
+                // Fecha a leitura do diretório
+                closedir($oDiretorio);
+            }
+            ?>
+        </ul>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>© 2026 MIT License. Todos os direitos reservados.</p>
+    </footer>
+</body>
+
+</html>

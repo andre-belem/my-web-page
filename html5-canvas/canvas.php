@@ -113,6 +113,7 @@
     <section id="about">
         <h2 class="section-title">Conteúdo do Curso</h2>
         <div class="about-content">
+            <p>Abaixo a lista do que foi aprendido no Curso, cada diretório representa um conteúdo</p>
             <div class="explorer-grid">
                 <?php
                 // Define qual diretório o PHP deve ler ('.' significa a pasta atual onde está o script)

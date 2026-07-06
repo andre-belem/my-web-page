@@ -109,7 +109,7 @@
 
 
 
-    <!-- Sobre -->
+    <!-- SOBRE -->
     <section id="about">
         <h2 class="section-title">Conteúdo do Curso</h2>
         <div class="about-content">

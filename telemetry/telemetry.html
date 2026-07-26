@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,69 +10,402 @@
 
 <body>
 
-<!-- Fixed Top Panel with Centered Title -->
-<header class="fixed-header">
-    <div class="logo"><a href="http://andre.belem.br">andre.belem.br</a></div>
-    <div class="header-title"><a>Project Node Telemetry</a></div> <!-- Centered Title -->
-    <div class="header-right"><a href="http://andre.belem.br">Voltar</a></div> <!-- Empty spacer to balance the layout -->
-</header>
+    <!-- Fixed Top Panel with Centered Title -->
+    <header class="fixed-header">
+        <div class="logo"><a href="http://andre.belem.br">andre.belem.br</a></div>
+        <div class="header-title"><a>Project Node Telemetry</a></div> <!-- Centered Title -->
+        <div class="header-right"><a href="http://andre.belem.br">Voltar</a></div>
+        <!-- Empty spacer to balance the layout -->
+    </header>
 
-    
+
     <!-- App Container -->
     <div class="app-container">
-        
+
         <!-- Fixed Left Menu (Sidebar) -->
         <aside class="left-sidebar">
             <ul class="sidebar-menu">
-                <li><a href="#topic1">Topic 1: Introduction</a></li>
-                <li><a href="#topic2">Topic 2: Getting Started</a></li>
-                <li><a href="#topic3">Topic 3: Core Features</a></li>
-                <li><a href="#topic4">Topic 4: Advanced Styling</a></li>
-                <li><a href="#topic5">Topic 5: Conclusion</a></li>
-                <li><a href="#topic6">Topic 5: End</a></li>
+                <li><a href="#topic1">Introdução</a></li>
+                <li><a href="#topic2">Tópico 1: Definição da Arquitetura do Sistema</a></li>
+                <li><a href="#topic3">Tópico 2: Configuração do Ambiente do Servidor</a></li>
+                <li><a href="#topic4">Tópico 3: Configuração do Banco de Dados</a></li>
+                <li><a href="#topic5">Tópico 4: Configuração do Broker MQTT</a></li>
+                <li><a href="#topic6">Tópico 5: Desenvolvimento do Firmware do ESP8266</a></li>
+                <li><a href="#topic7">Tópico 6: Desenvolvimento da Aplicação Node.js</a></li>
+                <li><a href="#topic8">Tópico 7: Desenvolvimento da Interface Web</a></li>
+                <li><a href="#topic9">Tópico 8: Testes de Comunicação</a></li>
+                <li><a href="#topic10">Tópico 9: Testes de Desempenho</a></li>
+                <li><a href="#topic11">Tópico 10: Validação do Sistema</a></li>
             </ul>
         </aside>
 
         <!-- Dynamic Main Content -->
         <main class="main-content">
-            
+
             <!-- Card 1 -->
             <section class="topic-card" id="topic1">
-                <h2>Topic 1: Introduction</h2>
-                <p>Welcome to your permanent dark mode interface. This application features a fixed top navbar and a secondary navigation panel pinned tightly to the left viewport frame. Click any menu link on your left to instantly jump down to that specific topic card.</p>
+                <h2>Introdução</h2>
+                <p>
+                    A Internet das Coisas (Internet of Things – IoT) tem revolucionado a forma como dispositivos
+                    eletrônicos coletam, compartilham e processam
+                    informações em tempo real. A integração entre sensores, microcontroladores e serviços em nuvem
+                    permite o desenvolvimento de soluções
+                    inteligentes para monitoramento, automação e controle em diversas áreas, como indústria,
+                    agricultura, cidades inteligentes e residências conectadas.
+                    <br>
+                    Este projeto apresenta o desenvolvimento de uma plataforma de aquisição e armazenamento de dados
+                    utilizando o microcontrolador ESP8266
+                    como dispositivo de coleta de informações. Os dados capturados são transmitidos por meio do
+                    protocolo MQTT, reconhecido por sua leveza
+                    e eficiência em aplicações IoT, utilizando o broker Mosquitto para intermediar a comunicação entre
+                    os dispositivos e o servidor.
+                    <br>
+                    No servidor, uma aplicação desenvolvida em Node.js é responsável pelo processamento das mensagens
+                    recebidas, realizando sua validação
+                    e armazenamento em um banco de dados MySQL. Essa arquitetura proporciona uma solução escalável, de
+                    baixo custo e capaz de armazenar
+                    informações históricas para posterior consulta, análise e visualização por meio de uma interface
+                    web.
+                    <br>
+                    A utilização dessas tecnologias demonstra uma arquitetura moderna para sistemas IoT, combinando
+                    comunicação assíncrona, armazenamento
+                    persistente de dados e tecnologias amplamente utilizadas no desenvolvimento de aplicações
+                    distribuídas. O resultado é uma plataforma
+                    robusta que pode ser expandida para diversas aplicações de monitoramento remoto e automação,
+                    servindo como base para projetos futuros.
+                </p>
             </section>
 
-            <!-- Card 2 -->
+            <h2>Etapas de Implementação do Projeto</h2>
+
+            <!-- Card 2 - DEFINIÇÃO DA ARQUITETURA-->
             <section class="topic-card" id="topic2">
-                <h2>Topic 2: Getting Started</h2>
-                <p>The layout uses hardcoded CSS variables directly inside the root selector. Since the dark theme is now permanent, the template code is lighter, faster to load, and completely free of JavaScript event listeners.</p>
+
+                <h2>Etapa 1: Definição da Arquitetura do Sistema</h2>
+                Inicialmente foi definida a arquitetura geral do sistema IoT, estabelecendo os componentes responsáveis
+                pela coleta, transmissão, processamento,
+                armazenamento e visualização dos dados. A comunicação entre o dispositivo ESP8266 e o servidor foi
+                baseada no protocolo MQTT, enquanto o
+                armazenamento foi realizado em um banco de dados MySQL.
+                <br><br>
+
+                <!-- MICROCONTROLADOR-->
+                <h2>Microcontrolador ESP32 - Placa DEVKIT1</h2><br>
+                <img src="imgs/esp32.png">
+                <br>
+                <ul>
+                    <li>Microcontrolador: ESP-12E (Baseado no SoC ESP8266)</li>
+                    <li>Velocidade do Clock: 80 MHz ou 160 MHz</li>
+                    <li>Memória Flash: 4 MB</li>
+                    <li>Memória SRAM: 64 KB</li>
+                    <li>Conectividade: Wi-Fi 802.11 b/g/n (com antena PCB embutida)</li>
+                    <li>Pinos de I/O Digital (GPIO): 11 pinos (suportam PWM, I2C, SPI)</li>
+                    <li>Pinos Analógicos (ADC): 1 pino (Faixa de 0 a 3,3 V)</li>
+                    <li>Tensão de Operação: 3,3 VDC</li>
+                    <li>Tensão de Alimentação: 4,5V a 10V (via pino VIN) ou 5V (via porta Micro USB)</li>
+                    <li>Interface USB-Serial: CP2102 ou CH340 (dependendo da versão/lote)</li>
+                </ul>
+
+
+                <!-- SENSORES -->
+                <br><br>
+                <h2>Sensores Ambientais</h2>
+                <li>Temperatura e Umidade (Sensor DHT22)
+                    <br><br><img src="imgs/dht22.png" style="display: block; margin-left: auto; margin-right: auto;">
+                    <ul>
+                        <li>Tensão de Operação: 3,3 V a 5,5 VCC</li>
+                        <li>Consumo de Corrente: ≈ 1 mA a 1,5 mA (em medição); 40 μA a 50 μA (em standby)</li>
+                        <li>Temperatura de Operação: -40°C a 80°C</li>
+                        <li>Precisão de Temperatura: ± 0,5°C</li>
+                        <li>Faixa de Umidade: 0 a 100% de Umidade Relativa (UR)</li>
+                        <li>Precisão de Umidade: ± 2% UR (típica), podendo chegar a ± 5% UR</li>
+                        <li>Tempo de Resposta (Amostragem): 2 segundos</li>
+                        <li>Resolução: 0,1°C para temperatura e 0,1% UR para umidade</li>
+                        <li>Protocolo de Comunicação: Sinal digital de barramento único (1-Wire)</li>
+                    </ul>
+                </li>
+
+                <li>Luminosidade (Light Dependent Resistor)</li>
+                <br>
+                <img src="imgs/ldr.jpg" style="display: block; margin-left: auto; margin-right: auto;">
+
+
+                <!-- INTERFACE -->
+                <br><br><br>
+                <h2>IHM / HMI (Interface Homem-Máquina)</h2>
+                <li>1 Led de 3mm Verde para Indicar Conexão Wi-Fi bem sucedida;</li>
+                <li>1 Led de 3mm Verde para Indicar Conexão ao Broker MQTT;</li>
+                <li>1 Led de 3mm Verde para Indicar Troca de Mensagens;</li>
+                <li>1 Botão para Reset de Configuração.</li>
+                <br>
             </section>
 
             <!-- Card 3 -->
             <section class="topic-card" id="topic3">
-                <h2>Topic 3: Core Features</h2>
-                <p>This layout uses CSS flexbox properties to cleanly separate block elements. The left menu utilizes a fixed height configuration combined with <code>overflow-y: auto</code>, ensuring that even if you have 50 topics in your sidebar list, it will scroll independently of the main content view window.</p>
+
+                <h2>Etapa 2: Configuração do Ambiente do Servidor</h2>
+                Foi preparado um servidor Linux contendo todos os serviços necessários para o funcionamento da
+                aplicação. Os
+                principais componentes instalados foram:
+                <br><br>
+                <li>Apache HTTP Server;</li>
+                <li>Node.js;</li>
+                <br>1. Update the system repository<br>
+                <p class="code">sudo dnf update -y</p><br>
+                <br>2. View available Node.js module streams:<br>
+                <p class="code">sudo dnf module list nodejs</p><br>
+                <br>3. Enable your desired version stream (e.g., version 24):<br>
+                <p class="code">sudo dnf module enable nodejs:24 -y</p><br>
+                <br>4. Install Node.js:<br>
+                <p class="code">sudo dnf install nodejs -y</p><br>
+                <br>5. Verification:<br>
+                <p class="code">node -v<br>npm -v</p><br>
+
+                <li>Broker MQTT Mosquitto;</li>
+                <br>1. Enable the EPEL Repository<br>
+                The Mosquitto software is not part of AlmaLinux's default repositories. You must install the EPEL
+                release configuration first:
+                <p class="code">sudo dnf install epel-release -y</p><br>
+                
+                <br>2. Refresh the Package Cache<br>
+                Clear and update your package cache to ensure dnf recognizes the new repository:
+                <p class="code">sudo dnf clean all<br>sudo dnf makecache</p><br>
+                
+                <br>3. Install Mosquitto<br>
+                Run the install command using the correct RHEL package name. This single package automatically includes
+                the client tools you need:
+                <p class="code">sudo dnf install mosquitto -y</p><br>
+                
+                <br>4. Enable and Start<br>
+                After the installation we need to enable and start the service:
+                <p class="code">sudo systemctl enable mosquitto<br>sudo systemctl start mosquitto</p><br>
+
+                <br>5. Verify the Installation<br>
+                Once finished, verify that your client utilities (such as mosquitto_sub) are available by checking their
+                version:
+                <p class="code">mosquitto_sub --help<br>sudo systemctl status mosquitto</p><br>
+
+                <br>6. Criação de um arquivo de senhas<br>
+                Crie um arquivo de senhas: Use o utilitário integrado para gerar credenciais criptografadas 
+                para um usuário (substitua usuario_mqtt pelo nome desejado).
+                <p class="code">sudo mosquitto_passwd -c /etc/mosquitto/passwd usuario_mqtt </p><br>
+ 
+                <br>7. Insira as regras de acesso<br>
+                Por padrão, a partir da versão 2.0+, o Mosquitto restringe o acesso apenas à interface local (localhost) e desativa 
+                conexões anônimas sem autenticação. Para permitir conexões de outros dispositivos na sua rede de forma segura, siga estas instruções:
+                <p class="code">sudo nano /etc/mosquitto/mosquitto.conf</p><br>
+                Insira as linhas abaixo no arquivo para escutar conexões externas na porta padrão e validar logins.
+                <p class="code">listener 1883<br>allow_anonymous false<br>password_file /etc/mosquitto/passwd</p><br>
+
+                <br>8. Teste de Funcionamento<br><br>
+                Prompt 1 - Autenticação e Inscrição no Tópico Desejado, aguardando novas mensagens.
+                <p class="code">mosquitto_sub -h andre.belem.br -p 1883 -t "casa/temperatura" -u usuario_mqtt -P usuario_mqtt</p><br>
+                <img src="imgs/prompt1-mqtt.png" style="display: block; margin-left: auto; margin-right: auto;"><br>
+                Prompt 2 - Autenticação e Envio de Mensagens no Tópico de Interesse.
+                <p class="code">mosquitto_pub -h andre.belem.br -p 1883 -t "casa/temperatura" -u usuario_mqtt -P usuario_mqtt -m "25.5"</p><br>
+                <br><img src="imgs/prompt2-mqtt.png" style="display: block; margin-left: auto; margin-right: auto;"><br>
+                Teste Externo - Código em Python de um Cliente MQTT
+<pre class="code">
+import time
+import paho.mqtt.client as mqtt
+
+# Configurações do Broker e Autenticação
+BROKER = "andre.belem.br"  # Substitua pelo IP ou URL do seu broker
+PORTA = 1883
+TOPICO = "casa/temperatura"
+USUARIO = "usuario_mqtt"
+SENHA = "usuario_mqtt"
+
+
+# Função executada quando a conexão é estabelecida
+def ao_conectar(client, userdata, flags, rc, properties=None):
+    if rc == 0:
+        print("Conectado com sucesso ao Broker!")
+        client.subscribe(TOPICO)
+        print(f"Inscrito no tópico: {TOPICO}")
+    else:
+        print(f"Falha na conexão. Código de retorno: {rc}")
+
+
+# Função executada quando uma nova mensagem chega
+def ao_receber_mensagem(client, userdata, msg):
+    mensagem_texto = msg.payload.decode()
+    print(f"Mensagem recebida no tópico {msg.topic}: {mensagem_texto}")
+
+
+# Inicializa o cliente MQTT (API Callback v2)
+cliente = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
+
+# Configura as credenciais de usuário e senha
+cliente.username_pw_set(USUARIO, SENHA)
+
+# Define as funções de retorno (callbacks)
+cliente.on_connect = ao_conectar
+cliente.on_message = ao_receber_mensagem
+
+# Conecta ao broker
+print("Conectando ao broker...")
+cliente.connect(BROKER, PORTA, 60)
+
+# Inicia o loop de escuta em segundo plano
+cliente.loop_start()
+
+# Mantém o script rodando para receber as mensagens
+try:
+    while True:
+        time.sleep(1)
+except KeyboardInterrupt:
+    print("\nDesconectando...")
+    cliente.loop_stop()
+    cliente.disconnect()
+    print("Programa encerrado.")
+</pre>
+
+<br><br><img src="imgs/python_mqtt.png" style="display: block; margin-left: auto; margin-right: auto;">
+
+                <!-- BANCO DE DADOS -->               
+                <li>Banco de dados MySQL;</li>
+                <li>PHP (para interface web, quando necessário).</li>
+
+                <br><br>
+                Após a instalação, todos os serviços foram configurados para iniciar automaticamente e operar de forma
+                integrada.
             </section>
 
             <!-- Card 4 -->
             <section class="topic-card" id="topic4">
-                <h2>Topic 4: Advanced Styling</h2>
-                <p>Notice the <code>scroll-margin-top: 80px</code> applied to our cards. This crucial line tells the web browser to leave exact padding space above the card when navigating with sidebar links. This stops the top fixed panel from accidentally resting on top of card headers.</p>
+
+                <h2>Etapa 3: Configuração do Banco de Dados</h2>
+
+                Foi criado um banco de dados MySQL destinado ao armazenamento das informações enviadas pelos
+                dispositivos
+                IoT.
+
+                Nesta etapa foram desenvolvidas as tabelas contendo campos como:
+
+                <li>Identificação do dispositivo;</li>
+                <li>Data e hora da leitura;</li>
+                <li>Variáveis medidas pelos sensores;</li>
+                <li>Endereço IP do dispositivo;</li>
+                <li>Outras informações necessárias ao monitoramento.</li>
+
+                Também foram criados índices para otimizar consultas futuras.
             </section>
+
 
             <!-- Card 5 -->
             <section class="topic-card" id="topic5">
-                <h2>Topic 5: Conclusion</h2>
-                <p>You have reached the final summary block. The styling will remain uniform across all page reloads since the system properties do not rely on dynamic browser cookies or class switching targets.</p>
+
+                <h2>Etapa 4: Configuração do Broker MQTT</h2>
+
+                O Mosquitto foi configurado para atuar como intermediário da comunicação entre os dispositivos e o
+                servidor.
+
+                Foram definidos:
+
+                <li>Porta de comunicação;</li>
+                <li>Tópicos MQTT;</li>
+                <li>Usuários e senhas;</li>
+                <li>Permissões de acesso;</li>
+                <li>Configurações de segurança.</li>
+
+
+                Essa etapa garantiu uma comunicação rápida e confiável entre os dispositivos conectados.
             </section>
 
             <!-- Card 6 -->
-            <section class="topic-card" id="topic5">
-                <h2>Topic 6: End</h2>
-                <p>You have reached the final summary block. The styling will remain uniform across all page reloads since the system properties do not rely on dynamic browser cookies or class switching targets.</p>
+            <section class="topic-card" id="topic6">
+
+                <h2>Etapa 5: Desenvolvimento do Firmware do ESP8266</h2>
+
+                Foi desenvolvido o firmware responsável por:
+
+                <li>Conectar o dispositivo à rede Wi-Fi;</li>
+                <li>Ler os sensores conectados;</li>
+                <li>Formatar os dados em JSON;</li>
+                <li>Publicar as mensagens MQTT periodicamente;</li>
+                <li>Tratar falhas de conexão;</li>
+                <li>Reconectar automaticamente em caso de perda da comunicação.</li>
             </section>
+
+            <!-- Card 7 -->
+            <section class="topic-card" id="topic7">
+
+                <h2>Etapa 6: Desenvolvimento da Aplicação Node.js</h2>
+
+                Foi criada uma aplicação utilizando Node.js responsável por:
+                <li>Conectar ao broker MQTT;</li>
+                <li>Assinar os tópicos de interesse;</li>
+                <li>Receber as mensagens publicadas pelos dispositivos;</li>
+                <li>Validar os dados recebidos;</li>
+                <li>Converter os dados para o formato adequado;</li>
+                <li>Inserir os registros no banco MySQL.</li>
+
+                Também foram implementados mecanismos para tratamento de erros e registro de eventos.
+            </section>
+
+            <!-- Card 8 -->
+            <section class="topic-card" id="topic8">
+
+                <h2>Etapa 7: Desenvolvimento da Interface Web</h2>
+
+                Foi desenvolvida uma interface web para permitir:
+
+                <li>Consulta dos dados armazenados;</li>
+                <li>Visualização em tabelas;</li>
+                <li>Exibição de gráficos históricos;</li>
+                <li>Monitoramento em tempo real;</li>
+                <li>Administração dos dispositivos cadastrados.</li>
+
+                Essa interface permite ao usuário acompanhar facilmente o funcionamento do sistema.
+            </section>
+
+            <!-- Card 9 -->
+            <section class="topic-card" id="topic9">
+
+                <h2>Etapa 8: Testes de Comunicação</h2>
+
+                Foram realizados testes para verificar:
+
+                <li>Conectividade Wi-Fi;</li>
+                <li>Publicação MQTT;</li>
+                <li>Recepção das mensagens pelo servidor;</li>
+                <li>Inserção correta no banco de dados;</li>
+                <li>Persistência das informações.</li>
+
+                Os testes garantiram a confiabilidade da comunicação entre todos os componentes.
+            </section>
+
+            <!-- Card 10 -->
+            <section class="topic-card" id="topic10">
+
+                <h2>Etapa 9: Testes de Desempenho</h2>
+
+                Foram avaliados aspectos como:
+
+                <li>Tempo de resposta;</li>
+                <li>Taxa de envio das mensagens;</li>
+                <li>Consumo de memória do servidor;</li>
+                <li>Consumo de processamento;</li>
+                <li>Estabilidade da aplicação durante funcionamento contínuo.</li>
+            </section>
+
+            <!-- Card 11 -->
+            <section class="topic-card" id="topic11">
+
+                <h2>Etapa 10: Validação do Sistema</h2>
+
+                Por fim, realizou-se a validação completa da plataforma, verificando o funcionamento integrado entre o
+                ESP8266, o broker MQTT, a aplicação Node.js, o banco de dados MySQL e a interface web. Os resultados
+                demonstraram que a solução foi capaz de receber, armazenar e disponibilizar os dados de forma confiável,
+                atendendo aos objetivos propostos pelo projeto.
+
+                </p>
+            </section>
+
         </main>
     </div>
 
 </body>
+
 </html>

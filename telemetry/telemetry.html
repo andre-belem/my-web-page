@@ -25,157 +25,150 @@
         <!-- Fixed Left Menu (Sidebar) -->
         <aside class="left-sidebar">
             <ul class="sidebar-menu">
-                <li><a href="#topic1">Introdução</a></li>
-                <li><a href="#topic2">Tópico 1: Definição da Arquitetura do Sistema</a></li>
-                <li><a href="#topic3">Tópico 2: Configuração do Ambiente do Servidor</a></li>
-                <li><a href="#topic4">Tópico 3: Configuração do Banco de Dados</a></li>
-                <li><a href="#topic5">Tópico 4: Configuração do Broker MQTT</a></li>
-                <li><a href="#topic6">Tópico 5: Desenvolvimento do Firmware do ESP8266</a></li>
-                <li><a href="#topic7">Tópico 6: Desenvolvimento da Aplicação Node.js</a></li>
-                <li><a href="#topic8">Tópico 7: Desenvolvimento da Interface Web</a></li>
-                <li><a href="#topic9">Tópico 8: Testes de Comunicação</a></li>
-                <li><a href="#topic10">Tópico 9: Testes de Desempenho</a></li>
-                <li><a href="#topic11">Tópico 10: Validação do Sistema</a></li>
+                <li><a href="#intro">Introdução</a></li>
+                <li><a href="#dev">Desenvolvimento</a></li>
+                <ul>
+                    <li><a href="#hardware">Hardware</a></li>
+                    <li><a href="#mosquitto">Mosquitto MQTT</a></li>
+                    <li><a href="#nodejs">Node.js</a></li>
+                    <li><a href="#firmware">Firmware do ESP32</a></li>
+                    <li><a href="#serverjs">Aplicação Node.js</a></li>
+                    <li><a href="#mysql">DB MySQL</a></li>
+                    <li><a href="#dashboard">Dashboard</a></li>
+                </ul>
+                <li><a href="#conclusao">Conclusão</a></li>
             </ul>
         </aside>
 
-        <!-- Dynamic Main Content -->
+        <!-- Main Content -->
         <main class="main-content">
 
-            <!-- Card 1 -->
-            <section class="topic-card" id="topic1">
-                <h2>Introdução</h2>
+            <!-- Introdução -->
+            <h2 class="title" id="intro">Introdução</h2>
+            <section class="topic-card">
                 <p>
-                    A Internet das Coisas (Internet of Things – IoT) tem revolucionado a forma como dispositivos
-                    eletrônicos coletam, compartilham e processam
-                    informações em tempo real. A integração entre sensores, microcontroladores e serviços em nuvem
-                    permite o desenvolvimento de soluções
-                    inteligentes para monitoramento, automação e controle em diversas áreas, como indústria,
-                    agricultura, cidades inteligentes e residências conectadas.
-                    <br>
-                    Este projeto apresenta o desenvolvimento de uma plataforma de aquisição e armazenamento de dados
-                    utilizando o microcontrolador ESP8266
-                    como dispositivo de coleta de informações. Os dados capturados são transmitidos por meio do
-                    protocolo MQTT, reconhecido por sua leveza
-                    e eficiência em aplicações IoT, utilizando o broker Mosquitto para intermediar a comunicação entre
-                    os dispositivos e o servidor.
-                    <br>
-                    No servidor, uma aplicação desenvolvida em Node.js é responsável pelo processamento das mensagens
-                    recebidas, realizando sua validação
-                    e armazenamento em um banco de dados MySQL. Essa arquitetura proporciona uma solução escalável, de
-                    baixo custo e capaz de armazenar
+                    Este projeto apresenta o desenvolvimento de uma plataforma completa de aquisição, armazenamento e
+                    apresentação de Dados recebidos de Hardwares Remotos, simplificando: IoT.
+                    <br><br>
+                    O hardware utilizando o foi o ESP32 com sensores para coleta de dados de temperatura, umidade,
+                    luminosidade, data e hora.
+                    Os dados capturados são formatados e transmitidos no formato de JSON pelo protocolo MQTT,
+                    reconhecido por sua leveza
+                    e eficiência em aplicações IoT, utilizando o broker Mosquitto instalado no próprio servidor.
+                    <br><br>
+                    No servidor, uma aplicação desenvolvida em Node.js é responsável pela conexão ao broker e
+                    processamento das mensagens recebidas, seja para visualição em tempo real ou armazenamento no Banco
+                    de dados MySQL.
+                    Essa arquitetura proporciona uma solução escalável, de baixo custo e capaz de armazenar
                     informações históricas para posterior consulta, análise e visualização por meio de uma interface
                     web.
-                    <br>
+                    <br><br>
                     A utilização dessas tecnologias demonstra uma arquitetura moderna para sistemas IoT, combinando
-                    comunicação assíncrona, armazenamento
-                    persistente de dados e tecnologias amplamente utilizadas no desenvolvimento de aplicações
-                    distribuídas. O resultado é uma plataforma
+                    comunicação assíncrona, armazenamento persistente de dados e tecnologias amplamente utilizadas no
+                    desenvolvimento de aplicações distribuídas. O resultado é uma plataforma
                     robusta que pode ser expandida para diversas aplicações de monitoramento remoto e automação,
                     servindo como base para projetos futuros.
                 </p>
             </section>
 
-            <h2>Etapas de Implementação do Projeto</h2>
 
-            <!-- Card 2 - DEFINIÇÃO DA ARQUITETURA-->
-            <section class="topic-card" id="topic2">
+            <!-- Implementação -->
+            <h2 class="title" id="dev">Desenvolvimento do Projeto</h2>
 
-                <h2>Etapa 1: Definição da Arquitetura do Sistema</h2>
-                Inicialmente foi definida a arquitetura geral do sistema IoT, estabelecendo os componentes responsáveis
-                pela coleta, transmissão, processamento,
-                armazenamento e visualização dos dados. A comunicação entre o dispositivo ESP8266 e o servidor foi
-                baseada no protocolo MQTT, enquanto o
-                armazenamento foi realizado em um banco de dados MySQL.
-                <br><br>
+            <!-- Hardware -->
+            <section class="topic-card" id="hardware">
+                <h2>Hardware</h2>
+                <br>
+                Foi definida a estrutura de hardware utilizado de acordo com nosso objetivo nesse projeto. O
+                Microcontrolado escolhido foi
+                o ESP32, para medição de temperatura e umidade está sendo usado o DHT22 que possui boa precisão e tempo
+                de resposta,
+                para a luminosidade um circuito divisor de tensão com um LDR, e por fim, alguns LEDs indicadores para
+                Troubleshooting.
+                <br><br><br>
 
                 <!-- MICROCONTROLADOR-->
                 <h2>Microcontrolador ESP32 - Placa DEVKIT1</h2><br>
                 <img src="imgs/esp32.png">
                 <br>
                 <ul>
-                    <li>Microcontrolador: ESP-12E (Baseado no SoC ESP8266)</li>
-                    <li>Velocidade do Clock: 80 MHz ou 160 MHz</li>
-                    <li>Memória Flash: 4 MB</li>
-                    <li>Memória SRAM: 64 KB</li>
-                    <li>Conectividade: Wi-Fi 802.11 b/g/n (com antena PCB embutida)</li>
-                    <li>Pinos de I/O Digital (GPIO): 11 pinos (suportam PWM, I2C, SPI)</li>
-                    <li>Pinos Analógicos (ADC): 1 pino (Faixa de 0 a 3,3 V)</li>
-                    <li>Tensão de Operação: 3,3 VDC</li>
-                    <li>Tensão de Alimentação: 4,5V a 10V (via pino VIN) ou 5V (via porta Micro USB)</li>
-                    <li>Interface USB-Serial: CP2102 ou CH340 (dependendo da versão/lote)</li>
+                    <li>Processador: Xtensa Dual-Core (ou Single-Core) de 32 bits LX6, operando de 160 a 240 MHz.</li>
+                    <li>Desempenho: Até 600 DMIPS.</li>
+                    <li>Memória RAM: 520 KB de SRAM (além de co-processador de ultra baixa potência - ULP).</li>
+                    <li>Memória Flash externa: Geralmente 4 MB (variável conforme o modelo da placa).</li>
+                    <li>ConectividadeWi-Fi: Protocolo 802.11 b/g/n (até 150 Mbps) em 2.4 GHz.</li>
+                    <li>Bluetooth: Versão 4.2 BR/EDR e BLE (Bluetooth Low Energy).</li>
+                    <li>Alimentação e TensõesTensão de Operação (Chip): 2.3V a 3.6V DC.</li>
+                    <li>Tensão Lógica (Pinos GPIO): 3.3V (os pinos não toleram 5V).</li>
+                    <li>Corrente de Operação: Média de 80 mA, podendo chegar a pico de 240 mA com Wi-Fi ativo.</li>
+                    <li>Periféricos e Pinos</li>
+                    <li>Conversores (ADC/DAC): Canais ADC de 12 bits e DAC de 8 bits.</li>
+                    <li>Interfaces digitais: SPI, I2C, UART, I2S, CAN.</li>
+                    <li>PWM: Pinos configuráveis com suporte a PWM.
                 </ul>
 
 
-                <!-- SENSORES -->
+                <!-- DHT22 -->
                 <br><br>
-                <h2>Sensores Ambientais</h2>
-                <li>Temperatura e Umidade (Sensor DHT22)
-                    <br><br><img src="imgs/dht22.png" style="display: block; margin-left: auto; margin-right: auto;">
-                    <ul>
-                        <li>Tensão de Operação: 3,3 V a 5,5 VCC</li>
-                        <li>Consumo de Corrente: ≈ 1 mA a 1,5 mA (em medição); 40 μA a 50 μA (em standby)</li>
-                        <li>Temperatura de Operação: -40°C a 80°C</li>
-                        <li>Precisão de Temperatura: ± 0,5°C</li>
-                        <li>Faixa de Umidade: 0 a 100% de Umidade Relativa (UR)</li>
-                        <li>Precisão de Umidade: ± 2% UR (típica), podendo chegar a ± 5% UR</li>
-                        <li>Tempo de Resposta (Amostragem): 2 segundos</li>
-                        <li>Resolução: 0,1°C para temperatura e 0,1% UR para umidade</li>
-                        <li>Protocolo de Comunicação: Sinal digital de barramento único (1-Wire)</li>
-                    </ul>
-                </li>
+                <h2>Sensor de Temperatura e Umidade DHT22</h2>
+                <br>
+                <img src="imgs/dht22.png" style="display: block; margin-left: auto; margin-right: auto;">
+                <ul>
+                    <li>Tensão de Operação: 3,3 V a 5,5 VCC</li>
+                    <li>Consumo de Corrente: ≈ 1 mA a 1,5 mA (em medição); 40 μA a 50 μA (em standby)</li>
+                    <li>Temperatura de Operação: -40°C a 80°C</li>
+                    <li>Precisão de Temperatura: ± 0,5°C</li>
+                    <li>Faixa de Umidade: 0 a 100% de Umidade Relativa (UR)</li>
+                    <li>Precisão de Umidade: ± 2% UR (típica), podendo chegar a ± 5% UR</li>
+                    <li>Tempo de Resposta (Amostragem): 2 segundos</li>
+                    <li>Resolução: 0,1°C para temperatura e 0,1% UR para umidade</li>
+                    <li>Protocolo de Comunicação: Sinal digital de barramento único (1-Wire)</li>
+                </ul>
 
-                <li>Luminosidade (Light Dependent Resistor)</li>
+                <!-- DHT22 -->
+                <br><br>
+                <h2>Luminosidade (Light Dependent Resistor)</h2>
                 <br>
                 <img src="imgs/ldr.jpg" style="display: block; margin-left: auto; margin-right: auto;">
 
 
                 <!-- INTERFACE -->
-                <br><br><br>
+                <br><br>
                 <h2>IHM / HMI (Interface Homem-Máquina)</h2>
-                <li>1 Led de 3mm Verde para Indicar Conexão Wi-Fi bem sucedida;</li>
-                <li>1 Led de 3mm Verde para Indicar Conexão ao Broker MQTT;</li>
-                <li>1 Led de 3mm Verde para Indicar Troca de Mensagens;</li>
-                <li>1 Botão para Reset de Configuração.</li>
+                <ul>
+                    <li>1 Led de 5mm Verde para Indicar Conexão Wi-Fi bem sucedida;</li>
+                    <li>1 Led de 5mm Verde para Indicar Conexão ao Broker MQTT;</li>
+                    <li>1 Led de 5mm Verde para Indicar Envio de Mensagem;</li>
+                    <li>1 Led de 5mm Verde para Indicar Recebimento de Mensagem;</li>
+                    <li>1 Botão para Reset de Configuração.</li>
+                </ul>
                 <br>
             </section>
 
-            <!-- Card 3 -->
-            <section class="topic-card" id="topic3">
-
-                <h2>Etapa 2: Configuração do Ambiente do Servidor</h2>
-                Foi preparado um servidor Linux contendo todos os serviços necessários para o funcionamento da
-                aplicação. Os
-                principais componentes instalados foram:
+            <!-- Mosquitto MQTT -->
+            <section class="topic-card" id="mosquitto">
+                <h2>Configuração do Mosquitto MQTT</h2>
+                <br>
+                O Broker MQTT escolhido foi o Mosquitto, existem brokers públicos que poderiam ser utilizados, mas optei
+                por ter meu próprio, isso garante
+                controle total da plataforma, acesso a logs e configurações personalizadas. Em contrapartida, aumenta a
+                carga do servidor e exige monitoramento.
                 <br><br>
-                <li>Apache HTTP Server;</li>
-                <li>Node.js;</li>
-                <br>1. Update the system repository<br>
-                <p class="code">sudo dnf update -y</p><br>
-                <br>2. View available Node.js module streams:<br>
-                <p class="code">sudo dnf module list nodejs</p><br>
-                <br>3. Enable your desired version stream (e.g., version 24):<br>
-                <p class="code">sudo dnf module enable nodejs:24 -y</p><br>
-                <br>4. Install Node.js:<br>
-                <p class="code">sudo dnf install nodejs -y</p><br>
-                <br>5. Verification:<br>
-                <p class="code">node -v<br>npm -v</p><br>
-
-                <li>Broker MQTT Mosquitto;</li>
                 <br>1. Enable the EPEL Repository<br>
-                The Mosquitto software is not part of AlmaLinux's default repositories. You must install the EPEL
-                release configuration first:
+                O Software Mosquitto não faz parte do repositório padrão do AlmaLinux. Primeiro é necessário instalar os
+                pacotes extras,
+                do inglês EPEL Extra Packages for Enterprise Linux.<br>
                 <p class="code">sudo dnf install epel-release -y</p><br>
-                
+
                 <br>2. Refresh the Package Cache<br>
                 Clear and update your package cache to ensure dnf recognizes the new repository:
                 <p class="code">sudo dnf clean all<br>sudo dnf makecache</p><br>
-                
+
                 <br>3. Install Mosquitto<br>
                 Run the install command using the correct RHEL package name. This single package automatically includes
                 the client tools you need:
                 <p class="code">sudo dnf install mosquitto -y</p><br>
-                
+
                 <br>4. Enable and Start<br>
                 After the installation we need to enable and start the service:
                 <p class="code">sudo systemctl enable mosquitto<br>sudo systemctl start mosquitto</p><br>
@@ -186,26 +179,36 @@
                 <p class="code">mosquitto_sub --help<br>sudo systemctl status mosquitto</p><br>
 
                 <br>6. Criação de um arquivo de senhas<br>
-                Crie um arquivo de senhas: Use o utilitário integrado para gerar credenciais criptografadas 
+                Crie um arquivo de senhas: Use o utilitário integrado para gerar credenciais criptografadas
                 para um usuário (substitua usuario_mqtt pelo nome desejado).
                 <p class="code">sudo mosquitto_passwd -c /etc/mosquitto/passwd usuario_mqtt </p><br>
- 
+
                 <br>7. Insira as regras de acesso<br>
-                Por padrão, a partir da versão 2.0+, o Mosquitto restringe o acesso apenas à interface local (localhost) e desativa 
-                conexões anônimas sem autenticação. Para permitir conexões de outros dispositivos na sua rede de forma segura, siga estas instruções:
+                Por padrão, a partir da versão 2.0+, o Mosquitto restringe o acesso apenas à interface local (localhost)
+                e desativa
+                conexões anônimas sem autenticação. Para permitir conexões de outros dispositivos na sua rede de forma
+                segura, siga estas instruções:
                 <p class="code">sudo nano /etc/mosquitto/mosquitto.conf</p><br>
                 Insira as linhas abaixo no arquivo para escutar conexões externas na porta padrão e validar logins.
                 <p class="code">listener 1883<br>allow_anonymous false<br>password_file /etc/mosquitto/passwd</p><br>
 
-                <br>8. Teste de Funcionamento<br><br>
+                <br><br>
+                <h2>Teste Local</h2>
+                <br>
                 Prompt 1 - Autenticação e Inscrição no Tópico Desejado, aguardando novas mensagens.
-                <p class="code">mosquitto_sub -h andre.belem.br -p 1883 -t "casa/temperatura" -u usuario_mqtt -P usuario_mqtt</p><br>
+                <p class="code">mosquitto_sub -h andre.belem.br -p 1883 -t "casa/temperatura" -u usuario_mqtt -P
+                    usuario_mqtt</p><br>
                 <img src="imgs/prompt1-mqtt.png" style="display: block; margin-left: auto; margin-right: auto;"><br>
                 Prompt 2 - Autenticação e Envio de Mensagens no Tópico de Interesse.
-                <p class="code">mosquitto_pub -h andre.belem.br -p 1883 -t "casa/temperatura" -u usuario_mqtt -P usuario_mqtt -m "25.5"</p><br>
+                <p class="code">mosquitto_pub -h andre.belem.br -p 1883 -t "casa/temperatura" -u usuario_mqtt -P
+                    usuario_mqtt -m "25.5"</p><br>
                 <br><img src="imgs/prompt2-mqtt.png" style="display: block; margin-left: auto; margin-right: auto;"><br>
-                Teste Externo - Código em Python de um Cliente MQTT
-<pre class="code">
+
+                <br><br>
+                <h2>Teste Externo</h2>
+                <br>
+                Código em Python de um Cliente MQTT que se conecta ao tópico usando autenticação e envia uma mensagem.
+                <pre class="code">
 import time
 import paho.mqtt.client as mqtt
 
@@ -261,146 +264,367 @@ except KeyboardInterrupt:
     print("Programa encerrado.")
 </pre>
 
-<br><br><img src="imgs/python_mqtt.png" style="display: block; margin-left: auto; margin-right: auto;">
+                <br>Log do Terminal do VSCode mostrando o resultado<br><br><img src="imgs/python_mqtt.png"
+                    style="display: block; margin-left: auto; margin-right: auto;">
 
-                <!-- BANCO DE DADOS -->               
-                <li>Banco de dados MySQL;</li>
-                <li>PHP (para interface web, quando necessário).</li>
+            </section>
 
+            <!-- Node.js -->
+            <section class="topic-card" id="nodejs">
+                <h2>Configuração do Node.js</h2>
+                <br>
+                No Beck-End a aplicação Node é responsável por escutar e tratar as mensagens recebidas pelos
+                dispositivos remotos conectados ao Broker MQTT.
                 <br><br>
-                Após a instalação, todos os serviços foram configurados para iniciar automaticamente e operar de forma
-                integrada.
+                <br>1. Update the system repository<br>
+                <p class="code">sudo dnf update -y</p><br>
+                <br>2. View available Node.js module streams:<br>
+                <p class="code">sudo dnf module list nodejs</p><br>
+                <br>3. Enable your desired version stream (e.g., version 24):<br>
+                <p class="code">sudo dnf module enable nodejs:24 -y</p><br>
+                <br>4. Install Node.js:<br>
+                <p class="code">sudo dnf install nodejs -y</p><br>
+                <br>5. Verification:<br>
+                <p class="code">node -v<br>npm -v</p><br>
             </section>
 
-            <!-- Card 4 -->
-            <section class="topic-card" id="topic4">
+            <!-- Fimrware -->
+            <section class="topic-card" id="firmware">
+                <h2>Firmware do ESP32</h2>
+                <br>
+                Escrevi o código em MicroPython usando a IDE Thonny, que tem as seguintes funções:<br>
+                <ul>
+                    <li>Conectar a Rede Wi-Fi</li>
+                    <li>Conectar ao Broker MQTT</li>
+                    <li>Se inscrever no tópico desejado</li>
+                    <li>Ler o Sensor DHT22</li>
+                    <li>Ler o ADC conectado ao LDR</li>
+                    <li>Ler a data e hora do RTC</li>
+                    <li>Formatar os dados em um Python Dictionary</li>
+                    <li>Converter os dados para JSON</li>
+                    <li>Publicar no tópico desejado</li>
+                </ul>
+                <br>
+                Código Fonte:
+                <br>
 
-                <h2>Etapa 3: Configuração do Banco de Dados</h2>
+                <pre class="code">
+# --- LIBRARIES ---
+import network
+import machine
+import time
+from machine import RTC, ADC, Pin
+from umqtt.simple import MQTTClient
+import dht
+import ujson
 
-                Foi criado um banco de dados MySQL destinado ao armazenamento das informações enviadas pelos
-                dispositivos
-                IoT.
+# --- CONFIGURAÇÕES DE PINOUT ---
+LED_BOARD = machine.Pin(2, machine.Pin.OUT)
+PINO_DHT = machine.Pin(4, machine.Pin.IN, machine.Pin.PULL_UP) # Usando o GPIO4 para o Sensor
+LED_WIFI = machine.Pin(23, machine.Pin.OUT) 	# LED Conexão WIFI
+LED_MQTT = machine.Pin(22, machine.Pin.OUT) 	# LED Conexão ao BROKER
+LED_SEND = machine.Pin(18, machine.Pin.OUT) 	# LED Envio de Mensagem
+LED_RECEIVE = machine.Pin(19, machine.Pin.OUT) 	# LED Recebimento de Mensagem
+LED_WIFI.value(0)
+LED_MQTT.value(0)
+LED_SEND.value(0)
+LED_RECEIVE.value(0)
+LDR = ADC(Pin(34))			# Configure GPIO 34 as an Analog Input
+LDR.atten(ADC.ATTN_11DB)  	# Full range: ~0.0V to 3.3V best with 11dB attenuation
+LDR.width(ADC.WIDTH_12BIT) 	# 12-bit resolution (0 - 4095)
 
-                Nesta etapa foram desenvolvidas as tabelas contendo campos como:
+# --- CONFIGURAÇÕES DA REDE ---
+CLIENT_ID = "XXX"
+WIFI_SSID = "XXX"
+WIFI_PASSWORD = "XXX"
+MQTT_BROKER = "XXX"  # Meu broker
+MQTT_PORT = XXX
+MQTT_USER = "XXX
+MQTT_PASSWORD = "XXX"
+MQTT_TOPIC_SUB = "XXX"
+MQTT_TOPIC_PUB = "XXX"
 
-                <li>Identificação do dispositivo;</li>
-                <li>Data e hora da leitura;</li>
-                <li>Variáveis medidas pelos sensores;</li>
-                <li>Endereço IP do dispositivo;</li>
-                <li>Outras informações necessárias ao monitoramento.</li>
+# --- DEFINE THE DATA VARIABLES --- 
+timestamp = "0000-00-00 00:00:00"
+temperature = 00.0
+humidity = 00.0
+light_level = 0  # Example value within the 0-4096 range
 
-                Também foram criados índices para otimizar consultas futuras.
+# --- ORGANIZE DATA INTO A PYTHON DICTIONARY --- 
+sensor_data = {
+    "Client": CLIENT_ID,
+    "Time": timestamp,
+    "Temperature_C": temperature,
+    "Humidity_Percent": humidity,
+    "Light_ADC": light_level
+}
+
+# --- CONFIGURAÇÕES DE RELÓGIO ---
+rtc = RTC()
+#rtc.datetime((2026, 7, 17, 0, 23, 13, 0, 0)) # set time, eg. 2017/8/23 1:12:48
+
+# --- INICIALIZAÇÃO DO SENSOR ---
+DHT_SENSOR = dht.DHT22(PINO_DHT)
+
+# --- FUNÇÃO PARA CONEXÃO DO WIFI ---
+def do_connect(ssid, password):
+    wlan = network.WLAN(network.STA_IF)
+    wlan.active(True)
+    if not wlan.isconnected():
+        print('connecting to network...')
+        wlan.connect(ssid, password)
+        while not wlan.isconnected():
+            machine.idle()
+    print('network config:', wlan.ifconfig() )
+    LED_WIFI.value(1)
+
+# --- FUNÇÃO PARA RECEBER MENSAGENS MQTT ---
+def callback_mensagem(topico, mensagem):
+    print(
+        f"MSG RECEIVED: {topico.decode()}: {mensagem.decode()}"
+    )
+    LED_RECEIVE.toggle()
+
+# --- MAIN ---
+# Janela de segurança para salvar de travamentos
+print("Iniciando em 5 segundos... Pressione Ctrl+C para cancelar.")
+time.sleep(5) 
+
+# --- CONECTA O WIFI ---
+do_connect(WIFI_SSID, WIFI_PASSWORD)
+
+# --- CONFIGURA O MQTT ---
+client = MQTTClient(
+    CLIENT_ID,
+    MQTT_BROKER,
+    port=MQTT_PORT,
+    user=MQTT_USER,
+    password=MQTT_PASSWORD,
+)
+client.set_callback(callback_mensagem)
+
+# --- CONECTA AO BROKER E SE INSCREVE NO TÓPICO ---
+try:
+    print("Conectando ao broker MQTT...")
+    client.connect()
+    print("Conectado ao MQTT!")
+    client.subscribe(MQTT_TOPIC_SUB)
+    print(f"Inscrito no tópico: {MQTT_TOPIC_SUB}")
+    LED_MQTT.value(1)
+
+    # Envia uma mensagem de inicialização
+    client.publish(MQTT_TOPIC_PUB,  f"Cliente Conectado {CLIENT_ID}")
+
+    # 4. Loop para manter a conexão e checar novas mensagens
+    while True:
+        try:
+            # Realiza a leitura do sensor DHT22
+            DHT_SENSOR.measure()
+            
+            # Realiza a leitura do sensor LDR
+            light_level = LDR.read() # High value (~4095) = Bright light, Low value (~0) = Complete darkness
+            
+            # Coleta os dados convertidos e formata
+            temperature = "{:2.1f}".format(DHT_SENSOR.temperature())
+            humidity = "{:2.1f}".format(DHT_SENSOR.humidity())
+            
+            # Coleta a data e hora e formata
+            agora = rtc.datetime()
+            timestamp = "{:04d}-{:02d}-{:02d} {:02d}:{:02d}:{:02d}".format(
+                agora[0], agora[1], agora[2], agora[4], agora[5], agora[6]) # Correto! (O segundo é o índice 7)
+            
+            # --- ORGANIZE DATA INTO A PYTHON DICTIONARY --- 
+            sensor_data = {
+                "Client": CLIENT_ID,
+                "Time": timestamp,
+                "Temperature_C": temperature,
+                "Humidity_Percent": humidity,
+                "Light_ADC": light_level
+            }
+            
+            # --- CONVERT THE DICTIONARY TO A JSON STRING ---
+            json_message = ujson.dumps(sensor_data)
+            
+            # Publica os valores no tópico
+            client.publish(MQTT_TOPIC_PUB, json_message)
+            LED_SEND.toggle()
+            
+            # Mensagem informativa
+            print("Dados enviados para o BROKER.")
+            
+        except OSError as e:
+            print("Falha ao ler o sensor DHT22")
+            
+        client.check_msg()  	# Verifica se há mensagens recebidas
+        LED_BOARD.value(1)     	# Liga o LED
+        time.sleep(0.5)    		# Aguarda 1 segundo
+        LED_BOARD.value(0)     	# Desliga o LED
+        time.sleep(0.5)    		# Aguarda 1 segundo
+        
+
+except OSError as e:
+    print("Falha ao conectar ao MQTT:", e)
+                </pre>
+
             </section>
 
-
-            <!-- Card 5 -->
-            <section class="topic-card" id="topic5">
-
-                <h2>Etapa 4: Configuração do Broker MQTT</h2>
-
-                O Mosquitto foi configurado para atuar como intermediário da comunicação entre os dispositivos e o
-                servidor.
-
-                Foram definidos:
-
-                <li>Porta de comunicação;</li>
-                <li>Tópicos MQTT;</li>
-                <li>Usuários e senhas;</li>
-                <li>Permissões de acesso;</li>
-                <li>Configurações de segurança.</li>
-
-
-                Essa etapa garantiu uma comunicação rápida e confiável entre os dispositivos conectados.
-            </section>
-
-            <!-- Card 6 -->
-            <section class="topic-card" id="topic6">
-
-                <h2>Etapa 5: Desenvolvimento do Firmware do ESP8266</h2>
-
-                Foi desenvolvido o firmware responsável por:
-
-                <li>Conectar o dispositivo à rede Wi-Fi;</li>
-                <li>Ler os sensores conectados;</li>
-                <li>Formatar os dados em JSON;</li>
-                <li>Publicar as mensagens MQTT periodicamente;</li>
-                <li>Tratar falhas de conexão;</li>
-                <li>Reconectar automaticamente em caso de perda da comunicação.</li>
-            </section>
-
-            <!-- Card 7 -->
-            <section class="topic-card" id="topic7">
-
-                <h2>Etapa 6: Desenvolvimento da Aplicação Node.js</h2>
-
+            <!-- Aplicação Node.js -->
+            <section class="topic-card" id="serverjs">
+                <h2>Aplicativo server.js</h2>
+                <br>
                 Foi criada uma aplicação utilizando Node.js responsável por:
-                <li>Conectar ao broker MQTT;</li>
-                <li>Assinar os tópicos de interesse;</li>
-                <li>Receber as mensagens publicadas pelos dispositivos;</li>
-                <li>Validar os dados recebidos;</li>
-                <li>Converter os dados para o formato adequado;</li>
-                <li>Inserir os registros no banco MySQL.</li>
-
+                <ul>
+                    <li>Conectar ao broker MQTT;</li>
+                    <li>Assinar os tópicos de interesse;</li>
+                    <li>Receber as mensagens publicadas pelos dispositivos;</li>
+                    <li>Validar os dados recebidos;</li>
+                    <li>Enviar os dados para a página HTML via Websocket;</li>
+                    <li>Inserir os registros no banco MySQL.</li>
+                </ul>
+                <br>
                 Também foram implementados mecanismos para tratamento de erros e registro de eventos.
+                <br>
+                <pre class="code">
+
+                </pre>
+
             </section>
 
-            <!-- Card 8 -->
-            <section class="topic-card" id="topic8">
+            <!-- Banco de Dados -->
+            <section class="topic-card" id="mysql">
+                <h2>Banco de Dados MySQL</h2>
+                <br>
+                Utilizando o MySQL instalado no projeto Gênesis foi criado uma database destinada ao armazenamento persistente dos dados enviadas pelos
+                dispositivos IoT.
+                <br><br><br>
+                <h2>Criação de Usuário</h2>
+                Por questões de segurança (princípio do privilégio mínimo) criamos um usuário dedicado limitando os danos 
+                caso as credenciais sejam expostas.
+                <h3>SQL</h3>
+                <pre class="code">
+-- 1. Cria o usuário com uma senha forte
+-- Substitua 'iot_user' pelo nome desejado e 'Senha_Forte_IoT_2026' por uma senha segura
+CREATE USER 'iot_user'@'%' IDENTIFIED BY 'Senha_Forte_IoT_2026';
 
-                <h2>Etapa 7: Desenvolvimento da Interface Web</h2>
+-- 2. Concede apenas as permissões de manipulação de dados no banco específico
+GRANT SELECT, INSERT, UPDATE, DELETE ON iot_monitoring.* TO 'iot_user'@'%';
 
+-- 3. Aplica as alterações de privilégios imediatamente
+FLUSH PRIVILEGES;
+                </pre>
+                <br><br>
+                <h2>Criação do Banco de Dados e Tabelas</h2>
+                Foi utilizada a abordagem de Duas Tabelas:
+                <br><br>
+                 Tabela de Leituras (sensor_data): Guarda apenas o ID do dispositivo, data/hora, temperatura, umidade 
+                e luminosidade. Ela cresce muito rápido.
+                <br><br>
+                Tabela de Status (device_status): Uma tabela separada que guarda apenas a última informação conhecida de IP, 
+                RSSI (Nível de Sinal do Wi-Fi), bateria, firmware e uptime de cada dispositivo. Ela é atualizada (UPDATE) a cada 
+                nova mensagem do aparelho, economizando espaço no banco de dados.
+                <h3>SQL</h3>
+                <pre class="code">
+-- 1. Criação do banco de dados
+CREATE DATABASE IF NOT EXISTS iot_monitoring;
+USE iot_monitoring;
+
+-- 2. Tabela de Cadastro e Status Atual do Dispositivo
+-- Guarda as informações operacionais mais recentes e dados estáticos
+CREATE TABLE IF NOT EXISTS devices (
+    device_id VARCHAR(50) NOT NULL,
+    device_name VARCHAR(100) NULL,
+    ip_address VARCHAR(45) NULL,          -- Suporta IPv4 e IPv6
+    rssi INT NULL,                        -- Intensidade do sinal Wi-Fi (dBm)
+    battery_level DECIMAL(5,2) NULL,      -- Nível da bateria (ex: 98.50%)
+    firmware_version VARCHAR(20) NULL,    -- Versão do código rodando no hardware
+    uptime BIGINT UNSIGNED NULL,          -- Tempo ativo em segundos desde o boot
+    last_ping TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Último contato
+    PRIMARY KEY (device_id)
+) ENGINE=InnoDB;
+
+-- 3. Tabela de Telemetria (Histórico de Leituras dos Sensores)
+-- Otimizada para inserções rápidas e consultas temporais
+CREATE TABLE IF NOT EXISTS sensor_data (
+    id BIGINT AUTO_INCREMENT NOT NULL,
+    device_id VARCHAR(50) NOT NULL,
+    temperature DECIMAL(5,2) NOT NULL,    -- Permite valores negativos e precisão (ex: -10.50 a 99.99)
+    humidity DECIMAL(5,2) NOT NULL,       -- Umidade relativa (ex: 65.40%)
+    light_intensity INT NOT NULL,         -- Luminosidade em Lux ou porcentagem
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Momento exato da leitura no banco
+    PRIMARY KEY (id),
+    CONSTRAINT fk_sensor_data_device 
+        FOREIGN KEY (device_id) REFERENCES devices(device_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB;
+
+-- 4. Criação de Índices para Otimização de Consultas
+-- Evita lentidão no futuro quando a tabela de leituras tiver milhões de registros
+CREATE INDEX idx_sensor_data_device_date ON sensor_data (device_id, created_at);
+CREATE INDEX idx_sensor_data_created_at ON sensor_data (created_at);
+                </pre>
+                <br><br>
+                <h2>Problema Prático</h2>
+                <br><br>
+                Não precisou de muito tempo para ver o problema dessa abordagem ao escalar o sistema.
+                <br>
+                Eu quero ter informação segundo a segundo, para plotar um gráfico dinamico em tempo real, 
+                se há necessidade, obviamente não, para esses dados de pouca variação como temperatura e umidade, coletas a cada 10 minutos, 
+                já entregariam a informação com boa resolução temporal.
+                <br>
+                O que me facina é ver um sistema respondendo em tempo real, é tampar o LDR e o gráfico cair, soprar no sensor e a umidade disparar,
+                e no meu conceito, o I do Iot, fala da Internet, que foi a Revolução que minha geração passou, é ter em segundos a resposta que tinha
+                que ser garimpada na Biblioteca, saber em tempo real o que está acontecendo em qualquer parte do mundo, é agilidade, é resposta rápida.
+                <br>
+                Coletar um dado a cada 10 minutos, só postergaria o problema, ele é íntrísico nas bases de dados estáticas, como Oracle, MySQL, Postgresql.
+                Elas foram projetadas, para guardar informação linear, como num livro, um registro que estará lá para sempre, páginas e páginas de linhas de 
+                pensamento ou um caminho necessário para entender assuntos complexos.
+                <br>
+                Já sensores fornecem Informação, ela é valiosa quando é novidade, e perde sua relevância com o tempo, no nosso projeto, eu quero saber a temperatura agora, 
+                no momento que veio a curiosidade, no momento que senti uma mudança no tempo, quero ver a resposta em tempo real, sentir que é ágil, imediata, 
+                como a Internet nos seduziu. Já a temperatura que fez ano passado nesse mesmo dia, basta-me saber se estava quente ou frio, ela não tem mais tanta relevância.
+                <br>
+                Isso prova que a informação não é linear, fazendo uma analogia com o corpo humano, nós sentimos e respondemos ao agora, tomamos decisões com base
+                no que nossos desejos e sensores biológicos nos informam, e somos lineares no tempo, nossa vida passa segundo a segundo. Nossa memória, se comporta 
+                de forma não Linear, com o passar dos anos, o que nos Interessa do passado é resumido ao que foi marcante, um resumo com os tópicos imporantes, 
+                como uma compactação, e dessa maneira essa Inormação se torna valiosa, nos tras nostalgia, e a sensação de que naquele tempo era melhor.
+                <br>
+                Foi a maneira que a biologia encontrou de ter sensores com ótima resolução e resposta e guardar numa memória compacta um século de informação.
+                <br>
+                Eu já conhecia o RRDTool, ele guardava o histórico do tráfego de rede dos equipamentos de telecomunicações na empresa que trabalhei, 
+                a necessidade e o problema são iguais, 
+
+
+
+            </section>
+
+            <!-- Dashboard -->
+            <section class="topic-card" id="dashboard">
+                <h2>Dashboard</h2>
+                <br>
                 Foi desenvolvida uma interface web para permitir:
 
-                <li>Consulta dos dados armazenados;</li>
-                <li>Visualização em tabelas;</li>
-                <li>Exibição de gráficos históricos;</li>
-                <li>Monitoramento em tempo real;</li>
-                <li>Administração dos dispositivos cadastrados.</li>
-
-                Essa interface permite ao usuário acompanhar facilmente o funcionamento do sistema.
+                <ul>
+                    <li>Consulta dos dados armazenados;</li>
+                    <li>Visualização em tabelas;</li>
+                    <li>Exibição de gráficos históricos;</li>
+                    <li>Monitoramento em tempo real;</li>
+                    <li>Visualizaçao dos dispositivos cadastrados.</li>
+                </ul>
             </section>
 
-            <!-- Card 9 -->
-            <section class="topic-card" id="topic9">
+            <!-- Conclusão -->
+            <h2 class="title" id="conclusao">Conclusão</h2>
 
-                <h2>Etapa 8: Testes de Comunicação</h2>
-
-                Foram realizados testes para verificar:
-
-                <li>Conectividade Wi-Fi;</li>
-                <li>Publicação MQTT;</li>
-                <li>Recepção das mensagens pelo servidor;</li>
-                <li>Inserção correta no banco de dados;</li>
-                <li>Persistência das informações.</li>
-
-                Os testes garantiram a confiabilidade da comunicação entre todos os componentes.
-            </section>
-
-            <!-- Card 10 -->
-            <section class="topic-card" id="topic10">
-
-                <h2>Etapa 9: Testes de Desempenho</h2>
-
-                Foram avaliados aspectos como:
-
-                <li>Tempo de resposta;</li>
-                <li>Taxa de envio das mensagens;</li>
-                <li>Consumo de memória do servidor;</li>
-                <li>Consumo de processamento;</li>
-                <li>Estabilidade da aplicação durante funcionamento contínuo.</li>
-            </section>
-
-            <!-- Card 11 -->
-            <section class="topic-card" id="topic11">
-
-                <h2>Etapa 10: Validação do Sistema</h2>
-
+            <!-- Conclusao -->
+            <section class="topic-card">
                 Por fim, realizou-se a validação completa da plataforma, verificando o funcionamento integrado entre o
-                ESP8266, o broker MQTT, a aplicação Node.js, o banco de dados MySQL e a interface web. Os resultados
+                ESP32, o broker MQTT, a aplicação Node.js, o banco de dados MySQL e a interface web. Os resultados
                 demonstraram que a solução foi capaz de receber, armazenar e disponibilizar os dados de forma confiável,
                 atendendo aos objetivos propostos pelo projeto.
+                <br><br>
+                Implementações futuras incluem: monitoramento da Plataforma, acompanhamento de Logs, uso de memória e processador, 
+                configuração de múltiplos usuários e dispositivos.
 
-                </p>
             </section>
 
         </main>

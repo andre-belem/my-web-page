@@ -1,0 +1,39 @@
+-- 1. Criação do banco de dados
+CREATE DATABASE IF NOT EXISTS iot_monitoring;
+USE iot_monitoring;
+
+-- 2. Tabela de Cadastro e Status Atual do Dispositivo
+-- Guarda as informações operacionais mais recentes e dados estáticos
+CREATE TABLE IF NOT EXISTS devices ( 
+    device_id VARCHAR(50) NOT NULL, 
+    device_name VARCHAR(100) NULL, 
+    local_ip VARCHAR(45) NULL,           -- Suporta IPv4 e IPv6 
+    public_ip VARCHAR(45) NULL,          -- Suporta IPv4 e IPv6 
+    rssi INT NULL,                       -- Intensidade do sinal Wi-Fi (dBm) 
+    battery_level DECIMAL(5,2) NULL,     -- Nível da bateria (ex: 98.50%) 
+    firmware_version VARCHAR(20) NULL,   -- Versão do código rodando no hardware 
+    uptime BIGINT UNSIGNED NULL,         -- Tempo ativo em segundos desde o boot 
+    status ENUM('online', 'offline', 'maintenance') DEFAULT 'offline',
+    last_ping TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Último contato 
+    PRIMARY KEY (device_id) 
+) ENGINE=InnoDB;
+
+-- 3. Tabela de Telemetria (Histórico de Leituras dos Sensores)
+-- Otimizada para inserções rápidas e consultas temporais
+CREATE TABLE IF NOT EXISTS sensor_data (
+    id BIGINT AUTO_INCREMENT NOT NULL,
+    device_id VARCHAR(50) NOT NULL,
+    temperature DECIMAL(5,2) NOT NULL,    -- Permite valores negativos e precisão (ex: -10.50 a 99.99)
+    humidity DECIMAL(5,2) NOT NULL,       -- Umidade relativa (ex: 65.40%)
+    light_intensity INT NOT NULL,         -- Luminosidade em Lux ou porcentagem
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Momento exato da leitura no banco
+    PRIMARY KEY (id),
+    CONSTRAINT fk_sensor_data_device 
+        FOREIGN KEY (device_id) REFERENCES devices(device_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB;
+
+-- 4. Criação de Índices para Otimização de Consultas
+-- Evita lentidão no futuro quando a tabela de leituras tiver milhões de registros
+CREATE INDEX idx_sensor_data_device_date ON sensor_data (device_id, created_at);
+CREATE INDEX idx_sensor_data_created_at ON sensor_data (created_at);

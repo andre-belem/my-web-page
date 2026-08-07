@@ -12,7 +12,7 @@
 /* 2. BASE LAYOUT STYLES */
 body {
     margin: 0;
-    padding-top: 60px; /* Offset for the fixed top panel */
+    padding-top: 0px; /* Offset for the fixed top panel */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
@@ -111,7 +111,7 @@ body {
 }
 
 .sidebar-menu li {
-    margin-bottom: 12px;
+    margin-bottom: 0px;
 }
 
 .sidebar-menu a {
@@ -154,6 +154,10 @@ body {
     margin-top: 0;
     margin-bottom: 12px;
     font-size: 1.5rem;
+}
+
+.title {
+    padding-top: 80px;
 }
 
 .topic-card p {

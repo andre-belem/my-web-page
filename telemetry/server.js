@@ -75,8 +75,8 @@ mqttClient.on('message', async (topic, message) => {
         console.log('Received payload:', payload); 
 
         // Mapeamento exato do seu JSON do ESP32
-        const deviceId         = payload.Client || 'dispositivo_padrao';
-        const deviceName       = payload.Client || 'Sensor Casa';
+        const deviceId         = payload.Device_id || 'dispositivo_padrao';
+        const deviceName       = payload.Device_name || 'Sensor Casa';
         const localIp          = payload.Local_Ip || null;
         const publicIp         = payload.public_ip || null; 
         const rssi             = payload.RSSI !== undefined ? payload.RSSI : null;

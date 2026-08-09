@@ -156,8 +156,9 @@ body {
     font-size: 1.5rem;
 }
 
-.title {
+.title-topic {
     padding-top: 80px;
+    scroll-margin-top: 80px; /* Smooth scroll offset so header doesn't cover card title */
 }
 
 .topic-card p {

@@ -95,8 +95,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const timestamp = dataReceived.x; 
             const sensorData = dataReceived.payload; // O JSON original do ESP32 está aqui dentro
 
-            if (sensorData.Client) {
-                document.getElementById('device-title').innerText = `Live Data: ${sensorData.Client}`;
+            if (sensorData.Device_id) {
+                document.getElementById('device-title').innerText = `Live Data: ${sensorData.Device_id}`;
             }
             if (sensorData.Time) {
                 document.getElementById('last-time').innerText = sensorData.Time;

@@ -43,37 +43,46 @@
         <!-- Main Content -->
         <main class="main-content">
 
-            <!-- Introdução -->
-            <h2 class="title" id="intro">Introdução</h2>
-            <section class="topic-card">
+
+            <!-- Descrição do Projeto -->
+            <section class="topic-card" id="intro"><span class="badge">Documentation</span>
+                <h1>Projeto Node Telemetry</h1>
+                <h3>Resumo</h3>
+
                 <p>
-                    Este projeto apresenta o desenvolvimento de uma plataforma completa de aquisição, armazenamento e
-                    apresentação de Dados recebidos de Hardwares Remotos, simplificando: IoT.
-                    <br><br>
-                    O hardware utilizando o foi o ESP32 com sensores para coleta de dados de temperatura, umidade,
-                    luminosidade, data e hora.
-                    Os dados capturados são formatados e transmitidos no formato de JSON pelo protocolo MQTT,
-                    reconhecido por sua leveza
-                    e eficiência em aplicações IoT, utilizando o broker Mosquitto instalado no próprio servidor.
-                    <br><br>
-                    No servidor, uma aplicação desenvolvida em Node.js é responsável pela conexão ao broker e
-                    processamento das mensagens recebidas, seja para visualição em tempo real ou armazenamento no Banco
-                    de dados MySQL.
+                    Este projeto de IoT (Internet of Things) apresenta o desenvolvimento de uma plataforma completa de
+                    aquisição, armazenamento e apresentação de Dados recebidos de Sensores Remotos.
+                    <br>
+                <h3>Etapas do Projeto:</h3>
+                <ul>
+                    <li>ESP32 e Sensores: Definição das variáveis medidas e conexão com o Hardware desejado.</li>
+                    <li>Mosquitto MQTT: Instalação do Broker responsável pela conexão e troca de mensagens.</li>
+                    <li>Node.js: Instalação do ambiente de execução da aplicação no backend.</li>
+                    <li>Firmware: Código fonte do Microcontrolador responsável pela coleta e envio das informações.</li>
+                    <li>Aplicação Node.js: Aplicação responsável pela escuta, armanezamento e visualização das mensagens.</li>
+                    <li>MySQL Database: Criação da base e tabelas para armazenamento persistente dos dados.</li>
+                    <li>Dashboard: Página com o resumo geral, histórico e alertas dos dispositivos..</li>
+                </ul>
+                <p>
                     Essa arquitetura proporciona uma solução escalável, de baixo custo e capaz de armazenar
                     informações históricas para posterior consulta, análise e visualização por meio de uma interface
                     web.
+                </p>
+                <p>
+                    <b>Conhecimentos:</b> Eletrônica, SysAdmin, 
                     <br><br>
-                    A utilização dessas tecnologias demonstra uma arquitetura moderna para sistemas IoT, combinando
-                    comunicação assíncrona, armazenamento persistente de dados e tecnologias amplamente utilizadas no
-                    desenvolvimento de aplicações distribuídas. O resultado é uma plataforma
-                    robusta que pode ser expandida para diversas aplicações de monitoramento remoto e automação,
-                    servindo como base para projetos futuros.
+                    <i>Focado em manter os servidores, redes e
+                        serviços funcionando corretamente.
+                        É a figura tradicional que configura servidores web, gerencia usuários, cuida de backups e
+                        prepara o
+                        ambiente para receber a aplicação de forma estável.
+                    </i>
                 </p>
             </section>
 
 
             <!-- Implementação -->
-            <h2 class="title" id="dev">Desenvolvimento do Projeto</h2>
+            <h2 class="title-topic" id="dev">Desenvolvimento do Projeto</h2>
 
             <!-- Hardware -->
             <section class="topic-card" id="hardware">
@@ -494,11 +503,13 @@ except OSError as e:
             <section class="topic-card" id="mysql">
                 <h2>Banco de Dados MySQL</h2>
                 <br>
-                Utilizando o MySQL instalado no projeto Gênesis foi criado uma database destinada ao armazenamento persistente dos dados enviadas pelos
+                Utilizando o MySQL instalado no projeto Gênesis foi criado uma database destinada ao armazenamento
+                persistente dos dados enviadas pelos
                 dispositivos IoT.
                 <br><br><br>
                 <h2>Criação de Usuário</h2>
-                Por questões de segurança (princípio do privilégio mínimo) criamos um usuário dedicado limitando os danos 
+                Por questões de segurança (princípio do privilégio mínimo) criamos um usuário dedicado limitando os
+                danos
                 caso as credenciais sejam expostas.
                 <h3>SQL</h3>
                 <pre class="code">
@@ -516,11 +527,13 @@ FLUSH PRIVILEGES;
                 <h2>Criação do Banco de Dados e Tabelas</h2>
                 Foi utilizada a abordagem de Duas Tabelas:
                 <br><br>
-                 Tabela de Leituras (sensor_data): Guarda apenas o ID do dispositivo, data/hora, temperatura, umidade 
+                Tabela de Leituras (sensor_data): Guarda apenas o ID do dispositivo, data/hora, temperatura, umidade
                 e luminosidade. Ela cresce muito rápido.
                 <br><br>
-                Tabela de Status (device_status): Uma tabela separada que guarda apenas a última informação conhecida de IP, 
-                RSSI (Nível de Sinal do Wi-Fi), bateria, firmware e uptime de cada dispositivo. Ela é atualizada (UPDATE) a cada 
+                Tabela de Status (device_status): Uma tabela separada que guarda apenas a última informação conhecida de
+                IP,
+                RSSI (Nível de Sinal do Wi-Fi), bateria, firmware e uptime de cada dispositivo. Ela é atualizada
+                (UPDATE) a cada
                 nova mensagem do aparelho, economizando espaço no banco de dados.
                 <h3>SQL</h3>
                 <pre class="code">
@@ -567,33 +580,96 @@ CREATE INDEX idx_sensor_data_created_at ON sensor_data (created_at);
                 <br><br>
                 Não precisou de muito tempo para ver o problema dessa abordagem ao escalar o sistema.
                 <br>
-                Eu quero ter informação segundo a segundo, para plotar um gráfico dinamico em tempo real, 
-                se há necessidade, obviamente não, para esses dados de pouca variação como temperatura e umidade, coletas a cada 10 minutos, 
+                Eu quero ter informação segundo a segundo, para plotar um gráfico dinamico em tempo real,
+                se há necessidade, obviamente não, para esses dados de pouca variação como temperatura e umidade,
+                coletas a cada 10 minutos,
                 já entregariam a informação com boa resolução temporal.
                 <br>
-                O que me facina é ver um sistema respondendo em tempo real, é tampar o LDR e o gráfico cair, soprar no sensor e a umidade disparar,
-                e no meu conceito, o I do Iot, fala da Internet, que foi a Revolução que minha geração passou, é ter em segundos a resposta que tinha
-                que ser garimpada na Biblioteca, saber em tempo real o que está acontecendo em qualquer parte do mundo, é agilidade, é resposta rápida.
+                O que me facina é ver um sistema respondendo em tempo real, é tampar o LDR e o gráfico cair, soprar no
+                sensor e a umidade disparar,
+                e no meu conceito, o I do Iot, fala da Internet, que foi a Revolução que minha geração passou, é ter em
+                segundos a resposta que tinha
+                que ser garimpada na Biblioteca, saber em tempo real o que está acontecendo em qualquer parte do mundo,
+                é agilidade, é resposta rápida.
                 <br>
-                Coletar um dado a cada 10 minutos, só postergaria o problema, ele é íntrísico nas bases de dados estáticas, como Oracle, MySQL, Postgresql.
-                Elas foram projetadas, para guardar informação linear, como num livro, um registro que estará lá para sempre, páginas e páginas de linhas de 
+                Coletar um dado a cada 10 minutos, só postergaria o problema, ele é íntrísico nas bases de dados
+                estáticas, como Oracle, MySQL, Postgresql.
+                Elas foram projetadas, para guardar informação linear, como num livro, um registro que estará lá para
+                sempre, páginas e páginas de linhas de
                 pensamento ou um caminho necessário para entender assuntos complexos.
                 <br>
-                Já sensores fornecem Informação, ela é valiosa quando é novidade, e perde sua relevância com o tempo, no nosso projeto, eu quero saber a temperatura agora, 
-                no momento que veio a curiosidade, no momento que senti uma mudança no tempo, quero ver a resposta em tempo real, sentir que é ágil, imediata, 
-                como a Internet nos seduziu. Já a temperatura que fez ano passado nesse mesmo dia, basta-me saber se estava quente ou frio, ela não tem mais tanta relevância.
+                Já sensores fornecem Informação, ela é valiosa quando é novidade, e perde sua relevância com o tempo, no
+                nosso projeto, eu quero saber a temperatura agora,
+                no momento que veio a curiosidade, no momento que senti uma mudança no tempo, quero ver a resposta em
+                tempo real, sentir que é ágil, imediata,
+                como a Internet nos seduziu. Já a temperatura que fez ano passado nesse mesmo dia, basta-me saber se
+                estava quente ou frio, ela não tem mais tanta relevância.
                 <br>
-                Isso prova que a informação não é linear, fazendo uma analogia com o corpo humano, nós sentimos e respondemos ao agora, tomamos decisões com base
-                no que nossos desejos e sensores biológicos nos informam, e somos lineares no tempo, nossa vida passa segundo a segundo. Nossa memória, se comporta 
-                de forma não Linear, com o passar dos anos, o que nos Interessa do passado é resumido ao que foi marcante, um resumo com os tópicos imporantes, 
-                como uma compactação, e dessa maneira essa Inormação se torna valiosa, nos tras nostalgia, e a sensação de que naquele tempo era melhor.
+                Isso prova que a informação não é linear, fazendo uma analogia com o corpo humano, nós sentimos e
+                respondemos ao agora, tomamos decisões com base
+                no que nossos desejos e sensores biológicos nos informam, e somos lineares no tempo, nossa vida passa
+                segundo a segundo. Nossa memória, se comporta
+                de forma não Linear, com o passar dos anos, o que nos Interessa do passado é resumido ao que foi
+                marcante, um resumo com os tópicos imporantes,
+                como uma compactação, e dessa maneira essa Inormação se torna valiosa, nos tras nostalgia, e a sensação
+                de que naquele tempo era melhor.
                 <br>
-                Foi a maneira que a biologia encontrou de ter sensores com ótima resolução e resposta e guardar numa memória compacta um século de informação.
+                Foi a maneira que a biologia encontrou de ter sensores com ótima resolução e resposta e guardar numa
+                memória compacta um século de informação.
                 <br>
-                Eu já conhecia o RRDTool, ele guardava o histórico do tráfego de rede dos equipamentos de telecomunicações na empresa que trabalhei, 
-                a necessidade e o problema são iguais, 
+                Eu já conhecia o RRDTool, ele guardava o histórico do tráfego de rede dos equipamentos de
+                telecomunicações na empresa que trabalhei,
+                a necessidade e o problema são iguais,
 
 
+
+            </section>
+
+            <!-- Proxy Reverso -->
+            <section class="topic-card" id="mysql">
+                <h2> Apache como Proxy Reverso</h2>
+                <br>
+                Utilizando o MySQL instalado no projeto Gênesis foi criado uma database destinada ao armazenamento
+                persistente dos dados enviadas pelos
+                dispositivos IoT.
+                <br><br><br>
+                <h2>Criação de Usuário</h2>
+                Por questões de segurança (princípio do privilégio mínimo) criamos um usuário dedicado limitando os
+                danos
+                caso as credenciais sejam expostas.
+                <h3>SQL</h3>
+                <pre class="code">
+-- 1. Cria o usuário com uma senha forte
+-- Substitua 'iot_user' pelo nome desejado e 'Senha_Forte_IoT_2026' por uma senha segura
+CREATE USER 'iot_user'@'%' IDENTIFIED BY 'Senha_Forte_IoT_2026';
+
+-- 2. Concede apenas as permissões de manipulação de dados no banco específico
+GRANT SELECT, INSERT, UPDATE, DELETE ON iot_monitoring.* TO 'iot_user'@'%';
+
+-- 3. Aplica as alterações de privilégios imediatamente
+FLUSH PRIVILEGES;
+                </pre>
+                <br><br>
+                <h2>Criação do Banco de Dados e Tabelas</h2>
+                Foi utilizada a abordagem de Duas Tabelas:
+                <br><br>
+                Tabela de Leituras (sensor_data): Guarda apenas o ID do dispositivo, data/hora, temperatura, umidade
+                e luminosidade. Ela cresce muito rápido.
+                <br><br>
+                Tabela de Status (device_status): Uma tabela separada que guarda apenas a última informação conhecida de
+                IP,
+                RSSI (Nível de Sinal do Wi-Fi), bateria, firmware e uptime de cada dispositivo. Ela é atualizada
+                (UPDATE) a cada
+                nova mensagem do aparelho, economizando espaço no banco de dados.
+                <h3>SQL</h3>
+                <pre class="code">
+
+                </pre>
+                <br><br>
+                <h2>Título Final</h2>
+                <br><br>
+                Texto do título final
+                <br>
 
             </section>
 
@@ -617,12 +693,21 @@ CREATE INDEX idx_sensor_data_created_at ON sensor_data (created_at);
 
             <!-- Conclusao -->
             <section class="topic-card">
+                <p>
+                    A utilização dessas tecnologias demonstra uma arquitetura moderna para sistemas IoT, combinando
+                    comunicação assíncrona, armazenamento persistente de dados e tecnologias amplamente utilizadas no
+                    desenvolvimento de aplicações distribuídas. O resultado é uma plataforma
+                    robusta que pode ser expandida para diversas aplicações de monitoramento remoto e automação,
+                    servindo como base para projetos futuros.
+                </p>
+
                 Por fim, realizou-se a validação completa da plataforma, verificando o funcionamento integrado entre o
                 ESP32, o broker MQTT, a aplicação Node.js, o banco de dados MySQL e a interface web. Os resultados
                 demonstraram que a solução foi capaz de receber, armazenar e disponibilizar os dados de forma confiável,
                 atendendo aos objetivos propostos pelo projeto.
                 <br><br>
-                Implementações futuras incluem: monitoramento da Plataforma, acompanhamento de Logs, uso de memória e processador, 
+                Implementações futuras incluem: monitoramento da Plataforma, acompanhamento de Logs, uso de memória e
+                processador,
                 configuração de múltiplos usuários e dispositivos.
 
             </section>

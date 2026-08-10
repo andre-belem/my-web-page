@@ -47,6 +47,7 @@ testDatabaseConnection();
 
 // Static files
 app.use('/libs/highcharts', express.static(path.join(__dirname, 'node_modules/highcharts'))); 
+app.use('/css', express.static(path.join(__dirname, '../css'))); 
 app.get('/', (req, res) => { res.sendFile(path.join(__dirname, 'index.html')); }); 
 app.use(express.static(__dirname)); 
 

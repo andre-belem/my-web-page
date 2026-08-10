@@ -12,7 +12,8 @@
 /* 2. BASE LAYOUT STYLES */
 body {
     margin: 0;
-    padding-top: 0px; /* Offset for the fixed top panel */
+    padding-top: 0px;
+    /* Offset for the fixed top panel */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
@@ -25,12 +26,12 @@ body {
     left: 0;
     width: 100%;
     height: 60px;
-    
+
     /* 1. Change display to grid with 3 equal columns */
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr; 
+    grid-template-columns: 1fr 2fr 1fr;
     align-items: center;
-    
+
     padding: 0 24px;
     box-sizing: border-box;
     background-color: var(--panel-bg);
@@ -43,24 +44,30 @@ body {
     font-weight: 600;
     font-size: 1.1rem;
     color: var(--text-color);
-    justify-self: center; /* Centers the title perfectly in the middle column */
+    justify-self: center;
+    /* Centers the title perfectly in the middle column */
     text-align: center;
 }
 
-.header-title a{
+.header-title a {
     font-size: 1.5rem;
     color: var(--link-hover);
 }
+
 /* Right side spacer to keep the grid balanced */
 .header-right {
-    justify-self: end; /* Aligns content to the far right */
+    justify-self: end;
+    /* Aligns content to the far right */
 }
 
 .header-right a {
-    color: #ffffff; /* Ou simplesmente: white */
-    text-decoration: none; /* Opcional: remove o sublinhado padrão de links */
+    color: #ffffff;
+    /* Ou simplesmente: white */
+    text-decoration: none;
+    /* Opcional: remove o sublinhado padrão de links */
     transition: color 0.5s ease, color 0.5s ease;
 }
+
 .header-right a:hover {
     color: var(--link-hover);
 }
@@ -70,13 +77,16 @@ body {
     font-weight: 700;
     font-size: 2.25rem;
     letter-spacing: 0.5px;
-    justify-self: start; /* Pushes logo to the far left */
+    justify-self: start;
+    /* Pushes logo to the far left */
     color: #fff;
 }
 
 .logo a {
-    color: #ffffff; /* Ou simplesmente: white */
-    text-decoration: none; /* Opcional: remove o sublinhado padrão de links */
+    color: #ffffff;
+    /* Ou simplesmente: white */
+    text-decoration: none;
+    /* Opcional: remove o sublinhado padrão de links */
     transition: color 0.5s ease, color 0.5s ease;
 }
 
@@ -93,15 +103,18 @@ body {
 /* 5. FIXED LEFT SIDEBAR MENU */
 .left-sidebar {
     position: fixed;
-    top: 60px; /* Starts exactly below the top panel */
+    top: 60px;
+    /* Starts exactly below the top panel */
     left: 0;
     width: 260px;
-    height: calc(100vh - 60px); /* Fills remaining height */
+    height: calc(100vh - 60px);
+    /* Fills remaining height */
     background-color: var(--panel-bg);
     border-right: 1px solid var(--panel-border);
     padding: 24px;
     box-sizing: border-box;
-    overflow-y: auto; /* Adds scrollbar inside menu if items overflow */
+    overflow-y: auto;
+    /* Adds scrollbar inside menu if items overflow */
 }
 
 .sidebar-menu {
@@ -132,10 +145,12 @@ body {
 
 /* 6. MAIN CONTENT AREA */
 .main-content {
-    margin-left: 260px; /* Offsets the width of the fixed sidebar */
+    margin-left: 260px;
+    /* Offsets the width of the fixed sidebar */
     padding: 40px;
+    padding-top: 80px;
     width: 100%;
-    max-width: 900px;
+    max-width: 1200px;
     box-sizing: border-box;
 }
 
@@ -147,7 +162,8 @@ body {
     padding: 28px;
     margin-bottom: 32px;
     box-shadow: 0 4px 6px var(--card-shadow);
-    scroll-margin-top: 80px; /* Smooth scroll offset so header doesn't cover card title */
+    scroll-margin-top: 80px;
+    /* Smooth scroll offset so header doesn't cover card title */
 }
 
 .topic-card h2 {
@@ -158,7 +174,8 @@ body {
 
 .title-topic {
     padding-top: 80px;
-    scroll-margin-top: 80px; /* Smooth scroll offset so header doesn't cover card title */
+    scroll-margin-top: 80px;
+    /* Smooth scroll offset so header doesn't cover card title */
 }
 
 .topic-card p {
@@ -168,8 +185,10 @@ body {
 }
 
 .topic-card a {
-    color: #ffffff; /* Ou simplesmente: white */
-    text-decoration: none; /* Opcional: remove o sublinhado padrão de links */
+    color: #ffffff;
+    /* Ou simplesmente: white */
+    text-decoration: none;
+    /* Opcional: remove o sublinhado padrão de links */
 }
 
 /* Smooth Scrolling Effect */
@@ -177,37 +196,106 @@ html {
     scroll-behavior: smooth;
 }
 
-.badge{
-    display:inline-block;
-    background:#ff810c;
+.badge {
+    display: inline-block;
+    background: #ff810c;
     color: black;
-    padding:6px 12px;
-    border-radius:999px
+    padding: 6px 12px;
+    border-radius: 999px
 }
 
 
 .code {
-background-color: #1e1e1e; /* Deep dark background */
-color: #1cbe3f;            /* Default text color */
-font-family: 'Fira Code', 'Courier New', Courier, monospace;
-font-size: 14px;
-line-height: 1.5;
-padding: 16px;
-border-radius: 8px;
-overflow-x: auto;          /* Enables scrolling for long lines */
-border: 1px solid #333;
-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    background-color: #1e1e1e;
+    /* Deep dark background */
+    color: #1cbe3f;
+    /* Default text color */
+    font-family: 'Fira Code', 'Courier New', Courier, monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    /* Enables scrolling for long lines */
+    border: 1px solid #333;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .code-response {
-background-color: #1e1e1e; /* Deep dark background */
-color: #ffffff;            /* Default text color */
-font-family: 'Fira Code', 'Courier New', Courier, monospace;
-font-size: 14px;
-line-height: 1.5;
-padding: 16px;
-border-radius: 8px;
-overflow-x: auto;          /* Enables scrolling for long lines */
-border: 1px solid #333;
-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    background-color: #1e1e1e;
+    /* Deep dark background */
+    color: #ffffff;
+    /* Default text color */
+    font-family: 'Fira Code', 'Courier New', Courier, monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    /* Enables scrolling for long lines */
+    border: 1px solid #333;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* 10. HIGHCHARTS GRAPH */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#chart-container {
+    height: 350px;
+    background: orange;
+    padding: 1px;
+    border-radius: 2px;
+    box-shadow: 4px 4px 4px rgba(255, 174, 0, 0.4);
+}
+
+#meta-info {
+    text-align: center;
+    margin-top: 15px;
+    color: #ccc;
+    font-size: 0.9em;
+}
+
+/* Estilo base para a etiqueta de status */
+.status-badge {
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+/* Estado: Online (Verde com efeito pulsar) */
+.status-badge.online {
+    background-color: rgba(46, 204, 113, 0.2);
+    color: #2ecc71;
+    animation: pulse-green 2s infinite;
+}
+
+/* Estado: Offline (Vermelho estático) */
+.status-badge.offline {
+    background-color: rgba(231, 76, 60, 0.2);
+    color: #e74c3c;
+}
+
+/* Animação de pulsação para o estado online */
+@keyframes pulse-green {
+    0% {
+        box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 6px rgba(46, 204, 113, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(46, 204, 113, 0);
+    }
+}
+
+.divider {
+    margin: 0 10px;
+    color: #555;
 }

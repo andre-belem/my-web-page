@@ -8,28 +8,6 @@
     <link href="../css/styles-projects.css" rel="stylesheet">
     <!-- Load local Highcharts script hosted by your own Express server -->
     <script src="node_modules/highcharts/highcharts.js"></script>
-    <style>
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        #chart-container {
-            height: 350px;
-            background: orange;
-            padding: 2px;
-            border-radius: 4px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        }
-
-        #meta-info {
-            text-align: center;
-            margin-top: 15px;
-            color: #ccc;
-            font-size: 0.9em;
-        }
-    </style>
 </head>
 
 <body>
@@ -72,10 +50,15 @@
             <!-- Descrição do Projeto -->
             <section class="topic-card" id="intro"><span class="badge">Documentation</span>
                 <h1>Projeto Node Telemetry</h1>
+
+                <!-- Gráfico Highcharts -->
                 <div class="container">
-                    <h2 style="text-align: center; color: white;" id="device-title">ESP32 Telemetry</h2>
                     <div id="chart-container"></div>
-                    <div id="meta-info">Last update: <span id="last-time">Never</span></div>
+                    <div id="meta-info">
+                        <span id="connection-status" class="status-badge offline">OFFLINE</span>
+                        <span class="divider">|</span>
+                        Last update: <span id="last-time">Never</span>
+                    </div>
                 </div>
 
                 <script>
@@ -91,7 +74,10 @@
                         });
 
                         const chart = Highcharts.chart('chart-container', {
-                            chart: { type: 'spline' },
+                            chart: {
+                                type: 'spline',
+                                animation: Highcharts.svg
+                            },
                             title: { text: 'Real-Time Sensor Environment' },
                             xAxis: {
                                 type: 'datetime',
@@ -100,12 +86,16 @@
                             yAxis: [
                                 { // Primary Axis: Temperature (Index 0)
                                     title: { text: 'Temperature (°C)', style: { color: '#FF3333' } },
-                                    labels: { style: { color: '#FF3333' } }
+                                    labels: { style: { color: '#FF3333' } },
+                                    softMin: 15,
+                                    softMax: 35
                                 },
                                 { // Secondary Axis: Humidity (Index 1)
                                     title: { text: 'Humidity (%)', style: { color: '#3399FF' } },
                                     labels: { style: { color: '#3399FF' } },
-                                    opposite: true
+                                    opposite: true,
+                                    min: 0,
+                                    max: 100
                                 },
                                 { // Tertiary Axis: Light (Index 2)
                                     title: { text: 'Light (ADC Value)', style: { color: '#FFAA00' } },
@@ -122,59 +112,121 @@
                             ]
                         });
 
-                        // CORREÇÃO 1: Detecta se o site roda em HTTP ou HTTPS para não quebrar o WebSocket no Apache
-                        const protocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
-                        const ws = new WebSocket(`${protocol}${window.location.host}/telemetry/ws`);
+                        let ws = null;
+                        let deviceTimeout = null;
+                        const TIMEOUT_INTERVAL = 5000; // 5 segundos
 
+                        // Função que gerencia o status do hardware (ESP32) na tela
+                        const updateDeviceStatus = (isOnline) => {
+                            const statusSpan = document.getElementById('connection-status');
+                            if (!statusSpan) return;
 
-                        ws.onmessage = (event) => {
-                            try {
-                                const dataReceived = JSON.parse(event.data);
-
-                                // O timestamp agora vem diretamente do processamento do servidor (Date.now())
-                                const timestamp = dataReceived.x;
-                                const sensorData = dataReceived.payload; // O JSON original do ESP32 está aqui dentro
-
-                                if (sensorData.Device_id) {
-                                    document.getElementById('device-title').innerText = `Live Data: ${sensorData.Device_id}`;
-                                }
-                                if (sensorData.Time) {
-                                    document.getElementById('last-time').innerText = sensorData.Time;
-                                }
-
-                                const maxPoints = 30;
-
-                                // 1. Process Temperature & dynamic scaling
-                                if (sensorData.Temperature_C !== undefined) {
-                                    const tempVal = parseFloat(sensorData.Temperature_C);
-                                    const shift = chart.series[0].data.length > maxPoints;
-                                    chart.series[0].addPoint([timestamp, tempVal], true, shift);
-                                    chart.yAxis[0].setExtremes(tempVal - 5, tempVal + 5, true, false);
-                                }
-
-                                // 2. Process Humidity & dynamic scaling
-                                if (sensorData.Humidity_Percent !== undefined) {
-                                    const humVal = parseFloat(sensorData.Humidity_Percent);
-                                    const shift = chart.series[1].data.length > maxPoints;
-                                    chart.series[1].addPoint([timestamp, humVal], true, shift);
-                                    chart.yAxis[1].setExtremes(humVal - 20, humVal + 5, true, false);
-                                }
-
-                                // 3. Process Light
-                                if (sensorData.Light_ADC !== undefined) {
-                                    const lightVal = parseInt(sensorData.Light_ADC, 10);
-                                    const shift = chart.series[2].data.length > maxPoints;
-                                    chart.series[2].addPoint([timestamp, lightVal], true, shift);
-                                }
-
-                            } catch (e) {
-                                console.error("Error updating graph payload:", e);
+                            if (isOnline) {
+                                statusSpan.className = 'status-badge online';
+                                statusSpan.innerText = 'ONLINE';
+                            } else {
+                                statusSpan.className = 'status-badge offline';
+                                statusSpan.innerText = 'OFFLINE';
                             }
                         };
 
-                        ws.onopen = () => console.log('WebSocket stream online.');
-                        ws.onclose = () => console.log('WebSocket stream offline.');
+                        // Encapsulamento da conexão para permitir reconexões automáticas
+                        function connectWebSocket() {
+                            // Definição das URLs movida para dentro do escopo da função (Garante que exista)
+                            const protocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
+                            const wsUrl = `${protocol}${window.location.host}/telemetry/ws`;
+
+                            console.log("Tentando conectar no endereço de WebSocket:", wsUrl);
+
+                            try {
+                                ws = new WebSocket(wsUrl);
+
+                                ws.onopen = () => {
+                                    console.log('Conectado com sucesso ao servidor Node.js!');
+                                };
+
+                                ws.onmessage = (event) => {
+                                    try {
+                                        const dataReceived = JSON.parse(event.data);
+                                        const timestamp = dataReceived.x;
+                                        const sensorData = dataReceived.payload;
+
+                                        // Se chegou qualquer dado válido, o dispositivo físico está vivo!
+                                        updateDeviceStatus(true);
+
+                                        // Limpa o temporizador antigo
+                                        if (deviceTimeout) clearTimeout(deviceTimeout);
+
+                                        // Inicia contagem regressiva de 10s para inatividade do ESP32
+                                        deviceTimeout = setTimeout(() => {
+                                            console.warn("Dispositivo ESP32 não responde. Definindo como OFFLINE.");
+                                            updateDeviceStatus(false);
+                                        }, TIMEOUT_INTERVAL);
+
+                                        if (sensorData.Device_id) {
+                                            chart.setTitle({ text: `Live Data: ${sensorData.Device_id}` });
+                                        }
+                                        if (sensorData.Time) {
+                                            document.getElementById('last-time').innerText = sensorData.Time;
+                                        }
+
+                                        const maxPoints = 30;
+                                        let needsRedraw = false;
+
+                                        // 1. Processa Temperatura (Index 0) - Adicionado [0]
+                                        if (sensorData.Temperature_C !== undefined) {
+                                            const tempVal = parseFloat(sensorData.Temperature_C);
+                                            const shift = chart.series[0].data.length > maxPoints;
+                                            chart.series[0].addPoint([timestamp, tempVal], false, shift);
+                                            needsRedraw = true;
+                                        }
+
+                                        // 2. Processa Umidade (Index 1) - Adicionado [1]
+                                        if (sensorData.Humidity_Percent !== undefined) {
+                                            const humVal = parseFloat(sensorData.Humidity_Percent);
+                                            const shift = chart.series[1].data.length > maxPoints;
+                                            chart.series[1].addPoint([timestamp, humVal], false, shift);
+                                            needsRedraw = true;
+                                        }
+
+                                        // 3. Processa Luz (Index 2) - Adicionado [2]
+                                        if (sensorData.Light_ADC !== undefined) {
+                                            const lightVal = parseInt(sensorData.Light_ADC, 10);
+                                            const shift = chart.series[2].data.length > maxPoints;
+                                            chart.series[2].addPoint([timestamp, lightVal], false, shift);
+                                            needsRedraw = true;
+                                        }
+
+                                        // Redesenha todos os eixos e curvas juntos uma única vez
+                                        if (needsRedraw) {
+                                            chart.redraw();
+                                        }
+                                    } catch (e) {
+                                        console.error("Erro interno ao processar JSON ou atualizar gráfico:", e);
+                                    }
+                                };
+
+                                ws.onclose = (event) => {
+                                    console.error(`WebSocket desconectado. Código: ${event.code}. Tentando reconectar em 5s...`);
+                                    if (deviceTimeout) clearTimeout(deviceTimeout);
+                                    updateDeviceStatus(false);
+                                    setTimeout(connectWebSocket, 5000);
+                                };
+
+                                ws.onerror = (err) => {
+                                    console.error('Erro detectado no canal WebSocket:', err);
+                                    ws.close(); // Força o encerramento para acionar o onclose com o temporizador
+                                };
+
+                            } catch (e) {
+                                console.error("Erro ao instanciar o objeto WebSocket:", e);
+                            }
+                        }
+
+                        // Inicializa a primeira conexão
+                        connectWebSocket();
                     });
+
                 </script>
                 <h3>Resumo</h3>
 
@@ -184,14 +236,14 @@
                     <br>
                 <h3>Etapas do Projeto:</h3>
                 <ul>
-                    <li>ESP32 e Sensores: Definição das variáveis medidas e conexão com o Hardware desejado.</li>
+                    <li>ESP32 e Sensores: Definição das variáveis medidas e ligação dos sensores com o Hardware.</li>
                     <li>Mosquitto MQTT: Instalação do Broker responsável pela conexão e troca de mensagens.</li>
                     <li>Node.js: Instalação do ambiente de execução da aplicação no backend.</li>
                     <li>Firmware: Código fonte do Microcontrolador responsável pela coleta e envio das informações.</li>
                     <li>Aplicação Node.js: Aplicação responsável pela escuta, armanezamento e visualização das
                         mensagens.</li>
                     <li>MySQL Database: Criação da base e tabelas para armazenamento persistente dos dados.</li>
-                    <li>Dashboard: Página com o resumo geral, histórico e alertas dos dispositivos..</li>
+                    <li>Dashboard: Página com o resumo geral, histórico, análise e alertas dos dispositivos..</li>
                 </ul>
                 <p>
                     Essa arquitetura proporciona uma solução escalável, de baixo custo e capaz de armazenar
@@ -199,7 +251,7 @@
                     web.
                 </p>
                 <p>
-                    <b>Conhecimentos:</b> Eletrônica, SysAdmin,
+                    <b>Conhecimentos:</b> Eletrônica, Firmware, SysAdmin, Javascript, WebSocket, MQTT, SQL, Highcharts, Full-Stack.
                     <br><br>
                     <i>Focado em manter os servidores, redes e
                         serviços funcionando corretamente.

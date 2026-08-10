@@ -6,6 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Node Telemetry</title>
     <link href="../css/styles-projects.css" rel="stylesheet">
+    <!-- Load local Highcharts script hosted by your own Express server -->
+    <script src="node_modules/highcharts/highcharts.js"></script>
+    <style>
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        #chart-container {
+            height: 350px;
+            background: orange;
+            padding: 2px;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        #meta-info {
+            text-align: center;
+            margin-top: 15px;
+            color: #ccc;
+            font-size: 0.9em;
+        }
+    </style>
 </head>
 
 <body>
@@ -34,6 +57,7 @@
                     <li><a href="#firmware">Firmware do ESP32</a></li>
                     <li><a href="#serverjs">Aplicação Node.js</a></li>
                     <li><a href="#mysql">DB MySQL</a></li>
+                    <li><a href="#proxy">Proxy Reverso</a></li>
                     <li><a href="#dashboard">Dashboard</a></li>
                 </ul>
                 <li><a href="#conclusao">Conclusão</a></li>
@@ -47,6 +71,110 @@
             <!-- Descrição do Projeto -->
             <section class="topic-card" id="intro"><span class="badge">Documentation</span>
                 <h1>Projeto Node Telemetry</h1>
+   <div class="container" >
+        <h2 style="text-align: center; color: white;" id="device-title">ESP32 Telemetry</h2>
+        <div id="chart-container"></div>
+        <div id="meta-info">Last update: <span id="last-time">Never</span></div>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    if (typeof Highcharts === 'undefined') {
+        console.error("Highcharts fallback failed. File could not be loaded locally.");
+        return;
+    }
+
+    // Configuração global para forçar o fuso horário local do navegador
+    Highcharts.setOptions({
+        time: { useUTC: false }
+    });
+
+    const chart = Highcharts.chart('chart-container', {
+        chart: { type: 'spline' },
+        title: { text: 'Real-Time Sensor Environment' },
+        xAxis: { 
+            type: 'datetime',
+            tickPixelInterval: 150 
+        },
+        yAxis: [
+            { // Primary Axis: Temperature (Index 0)
+                title: { text: 'Temperature (°C)', style: { color: '#FF3333' } },
+                labels: { style: { color: '#FF3333' } }
+            },
+            { // Secondary Axis: Humidity (Index 1)
+                title: { text: 'Humidity (%)', style: { color: '#3399FF' } },
+                labels: { style: { color: '#3399FF' } },
+                opposite: true
+            },
+            { // Tertiary Axis: Light (Index 2)
+                title: { text: 'Light (ADC Value)', style: { color: '#FFAA00' } },
+                labels: { style: { color: '#FFAA00' } },
+                opposite: true,
+                min: 0,
+                max: 4095
+            }
+        ],
+        series: [
+            { name: 'Temperature', data: [], yAxis: 0, color: '#FF3333' },
+            { name: 'Humidity', data: [], yAxis: 1, color: '#3399FF' },
+            { name: 'Light', data: [], yAxis: 2, color: '#FFAA00' }
+        ]
+    });
+
+    // CORREÇÃO 1: Detecta se o site roda em HTTP ou HTTPS para não quebrar o WebSocket no Apache
+    const protocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
+    const ws = new WebSocket(`${protocol}${window.location.host}/telemetry/ws`);
+
+
+    ws.onmessage = (event) => {
+        try {
+            const dataReceived = JSON.parse(event.data);
+            
+            // O timestamp agora vem diretamente do processamento do servidor (Date.now())
+            const timestamp = dataReceived.x; 
+            const sensorData = dataReceived.payload; // O JSON original do ESP32 está aqui dentro
+
+            if (sensorData.Device_id) {
+                document.getElementById('device-title').innerText = `Live Data: ${sensorData.Device_id}`;
+            }
+            if (sensorData.Time) {
+                document.getElementById('last-time').innerText = sensorData.Time;
+            }
+
+            const maxPoints = 30;
+
+            // 1. Process Temperature & dynamic scaling
+            if (sensorData.Temperature_C !== undefined) {
+                const tempVal = parseFloat(sensorData.Temperature_C);
+                const shift = chart.series[0].data.length > maxPoints;
+                chart.series[0].addPoint([timestamp, tempVal], true, shift);
+                chart.yAxis[0].setExtremes(tempVal - 5, tempVal + 5, true, false);
+            }
+
+            // 2. Process Humidity & dynamic scaling
+            if (sensorData.Humidity_Percent !== undefined) {
+                const humVal = parseFloat(sensorData.Humidity_Percent);
+                const shift = chart.series[1].data.length > maxPoints;
+                chart.series[1].addPoint([timestamp, humVal], true, shift);
+                chart.yAxis[1].setExtremes(humVal - 20, humVal + 5, true, false);
+            }
+
+            // 3. Process Light
+            if (sensorData.Light_ADC !== undefined) {
+                const lightVal = parseInt(sensorData.Light_ADC, 10);
+                const shift = chart.series[2].data.length > maxPoints;
+                chart.series[2].addPoint([timestamp, lightVal], true, shift);
+            }
+
+        } catch (e) {
+            console.error("Error updating graph payload:", e);
+        }
+    };
+
+    ws.onopen = () => console.log('WebSocket stream online.');
+    ws.onclose = () => console.log('WebSocket stream offline.');
+});
+</script>
                 <h3>Resumo</h3>
 
                 <p>
@@ -59,7 +187,8 @@
                     <li>Mosquitto MQTT: Instalação do Broker responsável pela conexão e troca de mensagens.</li>
                     <li>Node.js: Instalação do ambiente de execução da aplicação no backend.</li>
                     <li>Firmware: Código fonte do Microcontrolador responsável pela coleta e envio das informações.</li>
-                    <li>Aplicação Node.js: Aplicação responsável pela escuta, armanezamento e visualização das mensagens.</li>
+                    <li>Aplicação Node.js: Aplicação responsável pela escuta, armanezamento e visualização das
+                        mensagens.</li>
                     <li>MySQL Database: Criação da base e tabelas para armazenamento persistente dos dados.</li>
                     <li>Dashboard: Página com o resumo geral, histórico e alertas dos dispositivos..</li>
                 </ul>
@@ -69,7 +198,7 @@
                     web.
                 </p>
                 <p>
-                    <b>Conhecimentos:</b> Eletrônica, SysAdmin, 
+                    <b>Conhecimentos:</b> Eletrônica, SysAdmin,
                     <br><br>
                     <i>Focado em manter os servidores, redes e
                         serviços funcionando corretamente.
@@ -626,51 +755,37 @@ CREATE INDEX idx_sensor_data_created_at ON sensor_data (created_at);
             </section>
 
             <!-- Proxy Reverso -->
-            <section class="topic-card" id="mysql">
+            <section class="topic-card" id="proxy">
                 <h2> Apache como Proxy Reverso</h2>
                 <br>
-                Utilizando o MySQL instalado no projeto Gênesis foi criado uma database destinada ao armazenamento
-                persistente dos dados enviadas pelos
-                dispositivos IoT.
+                Para acessar o gráfico dinâmico, temos que acessar a página usando a porta no endereço, exemplo:
+                http://andre.belem.br:4000
+                para resolver isso e deixar transparente para o usuário, é necessário configurar o Apache como proxy
+                reverso.
+
                 <br><br><br>
-                <h2>Criação de Usuário</h2>
-                Por questões de segurança (princípio do privilégio mínimo) criamos um usuário dedicado limitando os
-                danos
-                caso as credenciais sejam expostas.
-                <h3>SQL</h3>
+                <h3>Crie um novo arquivo chamado telemetry.conf:</h3>
+                <pre class="code">sudo nano /etc/httpd/conf.d/telemetry_proxy.conf</pre>
+
+                <h3>Cole o código abaixo dentro dele:</h3>
                 <pre class="code">
--- 1. Cria o usuário com uma senha forte
--- Substitua 'iot_user' pelo nome desejado e 'Senha_Forte_IoT_2026' por uma senha segura
-CREATE USER 'iot_user'@'%' IDENTIFIED BY 'Senha_Forte_IoT_2026';
+&lt;IfModule mod_proxy.c>
+    # 1. Encaminha as conexões de WebSocket (Crucial para o seu gráfico)
+    ProxyPass /telemetry/ws ws://127.0.0.1:3000/
+    ProxyPassReverse /telemetry/ws ws://127.0.0.1:3000/
 
--- 2. Concede apenas as permissões de manipulação de dados no banco específico
-GRANT SELECT, INSERT, UPDATE, DELETE ON iot_monitoring.* TO 'iot_user'@'%';
-
--- 3. Aplica as alterações de privilégios imediatamente
-FLUSH PRIVILEGES;
+    # 2. Mantém o suporte caso o script use alguma rota HTTP comum na porta 3000
+    ProxyPass /telemetry/api http://127.0.0
+    ProxyPassReverse /telemetry/api http://127.0.0
+&lt;/IfModule>
                 </pre>
-                <br><br>
-                <h2>Criação do Banco de Dados e Tabelas</h2>
-                Foi utilizada a abordagem de Duas Tabelas:
-                <br><br>
-                Tabela de Leituras (sensor_data): Guarda apenas o ID do dispositivo, data/hora, temperatura, umidade
-                e luminosidade. Ela cresce muito rápido.
-                <br><br>
-                Tabela de Status (device_status): Uma tabela separada que guarda apenas a última informação conhecida de
-                IP,
-                RSSI (Nível de Sinal do Wi-Fi), bateria, firmware e uptime de cada dispositivo. Ela é atualizada
-                (UPDATE) a cada
-                nova mensagem do aparelho, economizando espaço no banco de dados.
-                <h3>SQL</h3>
-                <pre class="code">
 
-                </pre>
-                <br><br>
-                <h2>Título Final</h2>
-                <br><br>
-                Texto do título final
-                <br>
+                <h3>Liberar o SELinux no AlmaLinux</h3>
+                <pre class="code">sudo setsebool -P httpd_can_network_connect 1</pre>
 
+                <h3>Testar e Reiniciar o Apache</h3>
+                <p class="code">sudo apachectl configtest && sudo systemctl restart httpd</p>
+                              
             </section>
 
             <!-- Dashboard -->

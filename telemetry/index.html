@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ESP32 Sensor Dashboard</title>
     <!-- Load local Highcharts script hosted by your own Express server -->
-    <script src="/libs/highcharts/highcharts.js"></script>
+    <script src="node_modules/highcharts/highcharts.js"></script>
     <style>
         body {
             font-family: sans-serif;
@@ -85,7 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // CORREÇÃO 1: Detecta se o site roda em HTTP ou HTTPS para não quebrar o WebSocket no Apache
     const protocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
-    const ws = new WebSocket(`${protocol}${window.location.host}`);
+    const ws = new WebSocket(`${protocol}${window.location.host}/telemetry/ws`);
+
 
     ws.onmessage = (event) => {
         try {

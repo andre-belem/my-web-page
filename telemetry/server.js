@@ -84,6 +84,7 @@ mqttClient.on('message', async (topic, message) => {
         const batteryLevel     = payload.Battery !== undefined ? payload.Battery : null; 
         const firmwareVersion  = payload.Firmware || null;
         const uptime           = payload.Up_Time !== undefined ? payload.Up_Time : null;
+        const vchuva           = payload.V_Chuva !== undefined ? payload.V_Chuva : null;
         
         const temperature      = payload.Temperature_C !== undefined ? parseFloat(payload.Temperature_C) : undefined;
         const humidity         = payload.Humidity_Percent !== undefined ? parseFloat(payload.Humidity_Percent) : undefined;
@@ -118,11 +119,11 @@ mqttClient.on('message', async (topic, message) => {
 
                 const insertTelemetryQuery = `
                     INSERT INTO sensor_data (
-                        device_id, temperature, humidity, light_intensity
-                    ) VALUES (?, ?, ?, ?);
+                        device_id, temperature, humidity, light_intensity, v_chuva
+                    ) VALUES (?, ?, ?, ?, ?);
                 `;
                 await dbConnection.execute(insertTelemetryQuery, [
-                    deviceId, temperature, humidity, lightIntensity
+                    deviceId, temperature, humidity, lightIntensity, vchuva
                 ]);
 
                 await dbConnection.commit();

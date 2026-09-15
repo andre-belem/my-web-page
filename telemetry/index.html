@@ -78,12 +78,19 @@
                         opposite: true,
                         min: 0,
                         max: 4095
+                    },
+                    { // Tertiary Axis: Light (Index 2)
+                        title: { text: 'Battery (V)', style: { color: '#00d756' } },
+                        labels: { style: { color: '#00d756' } },
+                        min: 0,
+                        max: 21
                     }
                 ],
                 series: [
                     { name: 'Temperature', data: [], yAxis: 0, color: '#FF3333' },
                     { name: 'Humidity', data: [], yAxis: 1, color: '#3399FF' },
-                    { name: 'Light', data: [], yAxis: 2, color: '#FFAA00' }
+                    { name: 'Light', data: [], yAxis: 2, color: '#FFAA00' },
+                    { name: 'Battery', data: [], yAxis: 3, color: '#00d756' }
                 ]
             });
 
@@ -132,6 +139,13 @@
                         chart.series[2].addPoint([timestamp, lightVal], true, shift);
                     }
 
+                    // 4. Battery Level
+                    if (sensorData.Battery !== undefined) {
+                        const batVal = parseFloat(sensorData.Battery, 10);
+                        const shift = chart.series[3].data.length > maxPoints;
+                        chart.series[3].addPoint([timestamp, batVal], true, shift);
+                        chart.yAxis[3].setExtremes(13, 25, true, false);
+                    }
                 } catch (e) {
                     console.error("Error updating graph payload:", e);
                 }

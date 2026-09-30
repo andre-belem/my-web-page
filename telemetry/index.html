@@ -79,7 +79,7 @@
                         min: 0,
                         max: 4095
                     },
-                    { // Tertiary Axis: Light (Index 2)
+                    { // Tertiary Axis: Light (Index 3
                         title: { text: 'Battery (V)', style: { color: '#00d756' } },
                         labels: { style: { color: '#00d756' } },
                         min: 0,
@@ -144,7 +144,7 @@
                         const batVal = parseFloat(sensorData.Battery, 10);
                         const shift = chart.series[3].data.length > maxPoints;
                         chart.series[3].addPoint([timestamp, batVal], true, shift);
-                        chart.yAxis[3].setExtremes(13, 25, true, false);
+                        chart.yAxis[3].setExtremes(9, 13, true, false);
                     }
                 } catch (e) {
                     console.error("Error updating graph payload:", e);

@@ -1,0 +1,334 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>andre.belem.br</title>
+    <link href="../style.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    
+  </head>
+
+
+<!-- NAVBAR -->
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid"> 
+      <a class="navbar-brand" href="sobre.html">
+
+        <h2>Portifólio :: Capacity Plan</h2>
+
+      </a>
+      <a href="../index.html" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Pt</a>
+    </div>
+  </nav>
+
+  <body>
+  <br><br>
+
+
+<!-- CONTEXTO -->
+    <h1 class="title">Contexto</h1>
+    <div class='parent'>
+      <div class='about'>
+
+        <img src="../imgs/brands.png" alt="Brands" style="width:100%">
+        <br><br><br>
+        Durante minha graduação em Engenharia Elétrica pela PUCPR, participei de um processo selectivo buscando Trainees
+        para a até então pequena e promissora GVT, que ostentava um EBITDA de 40% ao Ano.
+        <br><br>
+        O processo foi rigoroso, 300 candidados das principais universidades de Curitiba (PUC, Federal, Utfpr, UniBrasil) 
+        disputando 10 vagas, realizando em 3 etapas com prova Escrita, Dinamica e Entrevista fui um dos selecionados.
+        <br><br>
+        Nesse programa éramos nomeados EDUTECS, faziamos Job Rotation a cada 4 meses entre áres de Operações 
+        e Engenharia, o objetivo era dar experiência e fazer contatos nas múltiplas áreas que compoem uma operadora.
+        <br><br>
+        No fim do meu terceiro ciclo, apos 1 ano e 2 meses, meu interesse e minha habilidade com scripts gerou
+        a efetivação na área de Engenharia de Dados como Analista JR, visto que minha graduação ainda estava em Curso.
+        <br><br>
+        Durante quase 10 anos, entre Agosto de 2009 a Novembro de 2018, vi e colaborei ativamente para a
+        empresa ser o provedor premiado como melhor internet do Brasil, a ferramenta desenvolvida Capacity Plan, foi um facilitador.
+
+     </div>
+
+   </div>
+
+
+<!-- DESAFIO -->
+<h1 class="title">Desafio</h1>
+<div class='parent'>
+  <div class='about'>
+
+    A empresa utilizava o software livre <a href="http://www.cacti.net">Cacti</a> para monitorar o tráfego das interfaces, 
+    robusto, é uma ferramenta de rede para armazenamento de dados e apresentação gráfica, utiliza o poder do RRDTool (Round Robin Database).
+    <br><br>
+    <img src="../imgs/cricket.png" alt="Cricket" style="width:100%">
+    <br><br>
+    Ótimo para a coleta dos dados, mas, péssimo na apresentação e geração de relatórios, aqui entra o Capacity Plan.
+    <br><br>
+
+    <br><br>   
+
+  </div>
+</div>
+
+
+<!-- SISTEMA -->
+<h1 class="title">Capacity Plan</h1>
+<div class='parent'>
+  <div class='about'>
+
+    <h4>Hardware</h4>
+    O sistema foi criado utilizando um computador ocioso da área, com processor Intel i3 e 4GB de memória.
+    Mais que suficiente para rodar os scripts e servir a página web com os resultados das coletas e análises.
+    <br><br>
+    <h4>Backend</h4>
+    Optei pelo conjunto LAMP (Linux Debian 8, Apache 2, MySQL, PHP 5). Juntos, eles oferece um conjunto comprovado de software para 
+    desenvolver aplicativos web de alto desempenho.
+    <br><br>
+    <h4>Frontend</h4>
+    Utilizando o Boostrap como framework pelo seu design "clean". O foco estava na aprentação gráfica dos dados.
+    Aqui precisavamos de uma ferramenta poderosa, um colega de área (Alexandre Guedes) me indiciou o 
+     <a href="https://www.highcharts.com/demo">HighCharts.</a>
+
+    <br><br>
+
+    <!-- Carousel -->
+    <div id="demo" class="carousel carousel-dark slide" data-bs-ride="carousel">
+
+        <!-- Indicators/dots -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="3"></button>
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="4"></button>
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="5"></button>
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="6"></button>
+        </div>
+        
+        <!-- The slideshow/carousel -->
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+            <img src="telas/cache.png" alt="Cache" class="d-block" style="width:100%">
+            </div>
+            <div class="carousel-item">
+            <img src="telas/interfaces.png" alt="Interfaces" class="d-block" style="width:100%">
+            </div>
+            <div class="carousel-item">
+            <img src="telas/peering.png" alt="Peering" class="d-block" style="width:100%">
+            </div>
+            <div class="carousel-item">
+                <img src="telas/sites.png" alt="Sites" class="d-block" style="width:100%">
+            </div>
+            <div class="carousel-item">
+                <img src="telas/peering.png" alt="Peering" class="d-block" style="width:100%">
+            </div>
+            <div class="carousel-item">
+                <img src="telas/topologia.png" alt="Topologia" class="d-block" style="width:100%">
+            </div>
+            <div class="carousel-item">
+                <img src="telas/roteadores.png" alt="Roteadores" class="d-block" style="width:100%">
+            </div>
+        </div>
+        
+        <!-- Left and right controls/icons -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    
+    </div>
+
+  </div>
+</div>
+
+
+<!-- METODO -->
+<h1 class="title">Método</h1>
+<div class='parent'>
+  <div class='about'>
+
+ 
+    <h4>Acesso</h4>    
+    O Servidor recebeu endereço ip estático dentro da rede MGMT (gerência) dos equipamentos por questões de segurança e 
+    rastreabilidade, os acessos aos equipamentos eram utilizando login/senha pessoais.
+    <br><br>
+
+    a idéia era apresentar o foi montado um servidor web Apache, com endereçamento da rede de gerência, 
+    e dentro das Polices de segurança dos equipamentos.
+    <br><br>
+    Todo dia as 5h da manha os scripts acessavam todos os equipamentos
+    da Rede IP, coletava todas as informacoes desejadas (Interfaces, Capacidade, Descrições, Placas instaladas, Portas Livres) e 
+    populava o MySQL.
+    <br><br>
+    A operadora utilizava o sistema opensource cricket para registrar o tráfego, tal sistema nao tinha 
+    informacao de capacidade da interface, aqui entra a função do Capacity Plan.
+    <br><br>
+    Cruzando as informações coletadas dos equipamentos com o sistema cricket, demos vida aos dados.
+    A base de dados mysql deu flexibilidade para organizar e agrupar as informações.
+    <br><br>
+    Os dados eram apresentados utilizando a biblioteca HighCharts em JavaScript e PHP como pode ser visualizado acima, dentro da 
+    base haviam relatórios semanais e histórico de crescimento utilizado para projeção de tráfego.
+
+ </div>
+
+</div>
+
+
+<!-- CONTATO -->
+<h1 class="title">Contact</h1>
+<div class='parent'>
+     <div class='contact'>
+      <a href="mailto:br.andrebelem@icloud.com?subject=Hello&body=Hi, "><img class='img-language' src="../imgs/email.png" alt="e-mail" ></a>
+     </div>
+     <div class='contact'>
+      <a href="en/about.html" ><img class='img-language' src="../imgs/zoom.png" alt="Zoom" ></a>
+     </div>
+     <div class='contact'>
+      <a href="https://api.whatsapp.com/send?phone=5541995883231&text=Hello" ><img class='img-language' src="../imgs/whatsapp.png" alt="Whatsapp" ></a>
+     </div>
+     <div class='contact'>
+        <a href="https://www.linkedin.com/in/andre-belem-b82553236/" ><img class='img-language' src="../imgs/linkedin.png" alt="Linkedin" ></a>
+     </div>
+ </div>
+
+    <script src="../main-script.js"></script>
+  </body>
+
+
+<!-- FOOTER -->
+<footer class="text-center text-lg-start bg-light text-muted">
+    <!-- Section: Social media -->
+    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+      <!-- Left -->
+      <div class="me-5 d-none d-lg-block">
+        <span><i>"Engineers doesn’t just build new things, they build solutions, they build hope for a better future. Canadian Engineers"</i></span>
+      </div>
+      <!-- Left -->
+  
+      <!-- Right -->
+      <div>
+        <a href="" class="me-4 text-reset">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+          <i class="fab fa-google"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+      <!-- Right -->
+    </section>
+    <!-- Section: Social media -->
+  
+
+
+    <!-- Section: Links  -->
+    <section class="">
+      <div class="container text-center text-md-start mt-5">
+        <!-- Grid row -->
+        <div class="row mt-3">
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <!-- Content -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              <i class="fas fa-gem me-3"></i>ABOUT ME
+            </h6>
+            <p>
+              Graduated in Electrical Engineering in 2013,
+              moving to Canada in 2023, looking for a Job Offer, thank's for your time! 
+              <br>
+              <br>
+              <img class='img-flag' src="../imgs/canada-flag.png" alt="Canadian flag">
+              <br>
+              Andre L A Belem
+            </p>
+          </div>
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              INTEREST
+            </h6>
+            <p>
+              <a href="#!" class="text-reset">Electrical Vehicles</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">Hardware & Firmware</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">FullStack Web Developer</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">Internet of Things</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          
+  
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              Useful links
+            </h6>
+            <p>
+              <a href="#!" class="text-reset">Change Language</Em></a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">About Me</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">Projects</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset"></a>
+            </p>
+          </div>
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+            <p><i class="fas fa-home me-3"></i>Florianópolis, Santa Catarina, BR</p>
+            <p>
+              <i class="fas fa-envelope me-3"></i>
+              br.andrebelem@icloud.com
+            </p>
+            <p><i class="fas fa-phone me-3"></i> +55 419 9588 3231</p>
+          </div>
+          <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+      </div>
+    </section>
+    <!-- Section: Links  -->
+  
+    <!-- Copyright -->
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+      © 2023 MIT License:
+      <a class="text-reset fw-bold" href="https://andre.belem.br/">andre.belem.br</a>
+    </div>
+    <!-- Copyright -->
+</footer>
+
+
+</html>
+

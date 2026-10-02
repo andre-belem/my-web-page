@@ -144,7 +144,7 @@
                         const batVal = parseFloat(sensorData.Battery, 10);
                         const shift = chart.series[3].data.length > maxPoints;
                         chart.series[3].addPoint([timestamp, batVal], true, shift);
-                        chart.yAxis[3].setExtremes(9, 13, true, false);
+                        // chart.yAxis[3].setExtremes(9, 13, true, false);
                     }
                 } catch (e) {
                     console.error("Error updating graph payload:", e);
